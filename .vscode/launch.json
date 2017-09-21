@@ -1,0 +1,17 @@
+{
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "type": "node",
+                "request": "launch",
+                "name": "Launch Program",
+                "program": "${workspaceRoot}/app.js",
+                "env":{
+                    "FB_APP_ID": "1901800013169369",
+                    "FB_PAGE_ID": "Beaver-Bot-1945229675744033",
+                    "PAGE_ACCESS_TOKEN": "DQVJ0VE96X19xY0FmOVVRNXRqSzFWemw3VkVJV2I1QXlsRWJOcENNNmRoNDRUbnZAVaS1OTVFmMjVJWlhPUGNOTVVoMVhUNGU5b20zdGF6TU96OEV3Q1hRRTZAJN0pIa1I1TGhtNzl3eTdDb0R5c09WY2p0ejFtZAzVaOEh2NmF3eDQ2SGtmQzRUdHhoSW94aTZAuVzJhbmVvMFNDMThVcjJIcWJJUGJ4RVExRjZAoVkJqbGpSVjBGUG5JNEw5TGRVNG02dkIwdlB0Qllwd2lMaHEwdwZDZD",
+                    "VERIFY_TOKEN": "beaver-bot-token"
+                }
+            }
+        ]
+    }
