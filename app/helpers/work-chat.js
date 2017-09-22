@@ -1,17 +1,19 @@
-var config = require('../../config/config'),
-    request = require('request'),
-    rp = require('request-promise');
+var config = require("../../config/config"),
+    request = require("request"),
+    rp = require("request-promise");
+
+const graphAPIUrl = "https://graph.facebook.com/v2.6/";
+const graphAPIMessageUrl = graphAPIUrl + "me/messages";
 
 module.exports = {
-
-  getUserName: function getUserName(sender) {
+  "getUserName": function getUserName(sender) {
     return rp({
-      url: 'https://graph.facebook.com/v2.6/' + sender,
+      url: graphAPIUrl + sender,
       qs: {
         access_token: config.page_access_token,
-        fields: "first_name,last_name"
+        fields: "first_name,last_name",
       },
-      method: 'GET'
+      method: "GET",
     })
     .then (function(data) {
       return JSON.parse(data);
@@ -19,56 +21,56 @@ module.exports = {
   },
 
   sendTextMessage: function sendTextMessage(sender, text) {
-    messageData = {
-      text:text
+    let messageData = {
+      text: text,
     };
     postMessage(sender, messageData);
   },
 
   sendAudioMessage: function sendAudioMessage(sender, audioUrl) {
-    messageData = {
+    let messageData = {
       attachment:{
         type: "audio",
         payload: {
-          url: audioUrl
-        }
-      }
+          url: audioUrl,
+        },
+      },
     };
     postMessage(sender, messageData);
   },
 
   sendFileMessage: function sendFile(sender, fileUrl) {
-    messageData = {
+    let messageData = {
       attachment:{
         type: "file",
         payload: {
-          url: fileUrl
-        }
-      }
+          url: fileUrl,
+        },
+      },
     };
     postMessage(sender, messageData);
   },
 
   sendVideoMessage: function sendVideo(sender, videoUrl) {
-    messageData = {
+    let messageData = {
       attachment:{
         type: "video",
         payload: {
-          url: videoUrl
-        }
-      }
+          url: videoUrl,
+        },
+      },
     };
     postMessage(sender, messageData);
   },
 
   sendImageMessage: function sendImage(sender, imageUrl) {
-    messageData = {
+    let messageData = {
       attachment:{
         type: "image",
         payload: {
-          url: imageUrl
-        }
-      }
+          url: imageUrl,
+        },
+      },
     };
     postMessage(sender, messageData);
   },
@@ -77,7 +79,7 @@ module.exports = {
       return {
         type: "web_url",
         url: url,
-        title: title
+        title: title,
       };
   }, 
 
@@ -85,20 +87,20 @@ module.exports = {
     return {
       type: "postback",
       title: title,
-      payload: payload
+      payload: payload,
     };
   }, 
 
   sendButtonsTemplate: function sendButtonsTemplate(sender, text, buttons) {
-    messageData = {
+    let messageData = {
       attachment:{
         type: "template",
         payload: {
           template_type: "button",
           text: text,
-          buttons: buttons
-        }
-      }
+          buttons: buttons,
+        },
+      },
     };
     postMessage(sender, messageData);
   },
@@ -108,7 +110,7 @@ module.exports = {
       "title": title,
       "subtitle": subtitle,
       "image_url": imageUrl,
-      "buttons": buttons
+      "buttons": buttons,
     };
   }, 
 
@@ -116,7 +118,7 @@ module.exports = {
     let template = {
       "content_type": "text",
       "title": title,
-      "payload": payload
+      "payload": payload,
     };
     if (imageUrl)
       template.image_url = imageUrl;
@@ -124,21 +126,21 @@ module.exports = {
     return template;
   }, 
 
-  createLocationQuickReply: function createLocationQuickReply (title, subtitle, imageUrl, buttons) {
+  createLocationQuickReply: function createLocationQuickReply () {
     return {
       "content_type": "location",
     };
   }, 
   
   sendGenericTemplate: function sendGenericTemplate(sender, cards) {
-    messageData = {
+    let messageData = {
       "attachment": {
         "type": "template",
         "payload": {
           "template_type": "generic",
-          "elements": cards
-        }
-      }
+          "elements": cards,
+        },
+      },
     };
     postMessage(sender, messageData);
   },
@@ -148,39 +150,39 @@ module.exports = {
   
   sendSenderAction: function sendSenderAction(sender, action){
     request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: { access_token: config.page_access_token },
-      method: 'POST',
+      url: graphAPIMessageUrl,
+      qs: { access_token: config.page_access_token, },
+      method: "POST",
       json: {
-      recipient: { id: sender },
-      sender_action: action
-    }
-    }, function(error, response, body) {
+        recipient: { id: sender, },
+        sender_action: action,
+      },
+    }, function(error, response) {
         if(error) {
-        console.log('Error sending messages: ', error);
-    }
-    else if(response.body.error) {
-        console.log('Error: ', response.body.error);
-    }
+            console.log("Error sending messages: ", error);
+        }
+        else if(response.body.error) {
+            console.log("Error: ", response.body.error);
+        }
     });
-  }
+  },
 };
 function postMessage(sender, messageData) {
     request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: { access_token: config.page_access_token },
-      method: 'POST',
+      url: graphAPIMessageUrl,
+      qs: { access_token: config.page_access_token, },
+      method: "POST",
       json: {
-      recipient: { id: sender },
-      message: messageData
-    }
-    }, function(error, response, body) {
+        recipient: { id: sender, },
+        message: messageData,
+      },
+    }, function(error, response) {
         if(error) {
-        console.log('Error sending messages: ', error);
-    }
-    else if(response.body.error) {
-        console.log('Error: ', response.body.error);
-    }
+            console.log("Error sending messages: ", error);
+        }
+        else if(response.body.error) {
+            console.log("Error: ", response.body.error);
+        }
     });
 }
 

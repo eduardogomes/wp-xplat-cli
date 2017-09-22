@@ -2,6 +2,7 @@ var gulp = require('gulp'),
   nodemon = require('gulp-nodemon'),
   plumber = require('gulp-plumber'),
   livereload = require('gulp-livereload'),
+  eslint = require('gulp-eslint'),
   stylus = require('gulp-stylus');
 
 gulp.task('develop', function () {
@@ -37,6 +38,13 @@ gulp.task('develop-no-rl', function () {
   });
 });
 
-gulp.task('default', [
-  'develop'
+gulp.task('lint', function () {
+  return gulp.src('app/**')
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('build', [
+  'lint'
 ]);
