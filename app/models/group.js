@@ -1,6 +1,7 @@
 var member = require("member"), 
     rp = require("request-promise"),
-    common = require("common");
+    common = require("common"), 
+    event = require("events");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
@@ -70,18 +71,9 @@ module.exports = {
       });
   },  
 
-  //TODO
   "getAllEvents": function getAllEvents(id, fields) {
-    if (fields.constructor !== Array) {
-      fields = this.getDefaultMemberFields();
-    }    
     let url = graphAPIUrl + id + "/events";
-    let events = [];
-
-    common.__getAllData(common.createGetOptions(url, fields), events)
-      .then (function(events) {
-        return JSON.parse(events);
-      });
+    return event.getEdgeEvents(url, fields);
   },  
 
   //TODO

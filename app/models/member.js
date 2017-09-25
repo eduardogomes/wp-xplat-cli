@@ -1,6 +1,7 @@
-var common = require("common");
+var common = require("common"), 
+    event = require("event");
 
-//const graphAPIUrl = "https://graph.facebook.com/v2.6/";
+const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
 module.exports = {
   "getAvailableMemberFields": function getAvailableMemberFields(){
@@ -41,8 +42,11 @@ module.exports = {
       });
   }, 
 
-  //TODO: /events
-
+  "getAllEvents": function getAllEvents(id, fields) {
+    let url = graphAPIUrl + id + "/events";
+    return event.getEdgeEvents(url, fields);
+  },  
+  
   //TODO: /feed
 
   //TODO: /conversations

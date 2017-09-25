@@ -30,25 +30,8 @@ module.exports = {
   },
 
   "getAllMembers": function getAllMembers(fields) {
-    if (fields.constructor !== Array) {
-      fields = member.getDefaultMemberFields();
-    }    
-    let options = {
-      url: graphAPIUrl + "community/members",
-      qs: {
-        fields: fields.join(),
-      },
-      headers: {
-        "Authorization": config.page_access_token,
-      },
-      method: "GET",
-    };
-    let members = [];
-
-    common.__getAllData(options, members)
-      .then (function(members) {
-        return JSON.parse(members);
-      });
+    let url = graphAPIUrl + "community/members";
+    return member.getEdgeMembers(url, fields);
   },
 };
 

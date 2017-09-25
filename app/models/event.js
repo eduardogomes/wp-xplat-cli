@@ -3,23 +3,27 @@ var common = require("common");
 //const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
 module.exports = {
-  "getAvailableReactionFields": function getAvailableReactionFields(){
+  "getAvailableEventFields": function getAvailableEventFields(){
     return [
-      "id",
+      "description",
+      "end_time",
       "name",
-      "type",
+      "place",
+      "start_time", 
+      "id",
+      "rsvp_status",
     ];
   },
 
-  "getEdgeReactions": function getEdgeReactions(url, fields) {
+  "getEdgeEvents": function getEdgeEvents(url, fields) {
     if (fields.constructor !== Array) {
-      fields = this.getAvailableReactionFields();
+      fields = this.getAvailableEventFields();
     }    
-    let reactions = [];
+    let events = [];
 
-    common.__getAllData(common.createGetOptions(url, fields), reactions)
-      .then (function(reactions) {
-        return JSON.parse(reactions);
+    common.__getAllData(common.createGetOptions(url, fields), events)
+      .then (function(events) {
+        return JSON.parse(events);
       });
   }, 
 };
