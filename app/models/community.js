@@ -1,8 +1,7 @@
 var config = require("../../config/config"),
-    request = require("request"),
-    rp = require("request-promise"), 
     group = require("group"),
-    member = require("member");
+    member = require("member"), 
+    common = require("common");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
@@ -18,13 +17,13 @@ module.exports = {
         fields: fields.join(),
       },
       headers: {
-        'Authorization': config.page_access_token,
+        "Authorization": config.page_access_token,
       },
       method: "GET",
-    }
+    };
     let groups = [];
 
-    __getAllData(options, groups)
+    common.__getAllData(options, groups)
       .then (function(groups) {
         return JSON.parse(groups);
       });
@@ -40,53 +39,17 @@ module.exports = {
         fields: fields.join(),
       },
       headers: {
-        'Authorization': config.page_access_token,
+        "Authorization": config.page_access_token,
       },
       method: "GET",
-    }
+    };
     let members = [];
 
-    __getAllData(options, members)
+    common.__getAllData(options, members)
       .then (function(members) {
         return JSON.parse(members);
       });
   },
 };
-function __getAllData(options, data) {
-  let deferred = Promise.defer();
-  request(options).then(res => {
-    var response = JSON.parse(res);
-    
-    data.push(response.data);
-    if (response.paging && response.paging.next){
-        options.url = response.paging.next;
-        __getAllData(options, data)
-        .then(function() {
-            deferred.resolve();
-        });
-    } else {
-        deferred.resolve();
-    }
-  });
-  return deferred.promise;
-}
 
-function postMessage(sender, messageData) {
-    request({
-      url: graphAPIMessageUrl,
-      qs: { access_token: config.page_access_token, },
-      method: "POST",
-      json: {
-        recipient: { id: sender, },
-        message: messageData,
-      },
-    }, function(error, response) {
-        if(error) {
-            console.log("Error sending messages: ", error);
-        }
-        else if(response.body.error) {
-            console.log("Error: ", response.body.error);
-        }
-    });
-}
 

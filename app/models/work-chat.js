@@ -1,6 +1,7 @@
 var config = require("../../config/config"),
     request = require("request"),
-    rp = require("request-promise");
+    rp = require("request-promise"), 
+    common = require("common");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 const graphAPIMessageUrl = graphAPIUrl + "me/messages";
@@ -24,7 +25,7 @@ module.exports = {
     let messageData = {
       text: text,
     };
-    postMessage(sender, messageData);
+    common.postMessage(sender, messageData);
   },
 
   "sendAudioMessage": function sendAudioMessage(sender, audioUrl) {
@@ -36,7 +37,7 @@ module.exports = {
         },
       },
     };
-    postMessage(sender, messageData);
+    common.postMessage(sender, messageData);
   },
 
   "sendFileMessage": function sendFile(sender, fileUrl) {
@@ -48,7 +49,7 @@ module.exports = {
         },
       },
     };
-    postMessage(sender, messageData);
+    common.postMessage(sender, messageData);
   },
 
   "sendVideoMessage": function sendVideo(sender, videoUrl) {
@@ -60,7 +61,7 @@ module.exports = {
         },
       },
     };
-    postMessage(sender, messageData);
+    common.postMessage(sender, messageData);
   },
 
   "sendImageMessage": function sendImage(sender, imageUrl) {
@@ -72,7 +73,7 @@ module.exports = {
         },
       },
     };
-    postMessage(sender, messageData);
+    common.postMessage(sender, messageData);
   },
 
   "createWebUrlTemplate": function createWebUrlTemplate (url, title) {
@@ -102,7 +103,7 @@ module.exports = {
         },
       },
     };
-    postMessage(sender, messageData);
+    common.postMessage(sender, messageData);
   },
 
   "createCardTemplate": function createCardTemplate (title, subtitle, imageUrl, buttons) {
@@ -142,7 +143,7 @@ module.exports = {
         },
       },
     };
-    postMessage(sender, messageData);
+    common.postMessage(sender, messageData);
   },
   "createSenderActionMarkSeen": () => { return "mark_seen"; },
   "createSenderActionTypingOn": () => { return "typing_on"; },
@@ -167,22 +168,3 @@ module.exports = {
     });
   },
 };
-function postMessage(sender, messageData) {
-    request({
-      url: graphAPIMessageUrl,
-      qs: { access_token: config.page_access_token, },
-      method: "POST",
-      json: {
-        recipient: { id: sender, },
-        message: messageData,
-      },
-    }, function(error, response) {
-        if(error) {
-            console.log("Error sending messages: ", error);
-        }
-        else if(response.body.error) {
-            console.log("Error: ", response.body.error);
-        }
-    });
-}
-

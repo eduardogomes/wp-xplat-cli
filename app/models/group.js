@@ -1,7 +1,6 @@
-var config = require("../../config/config"),
-    request = require("request"),
-    rp = require("request-promise"), 
-    member = require("member");
+var member = require("member"), 
+    rp = require("request-promise"),
+    common = require("common");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
@@ -30,9 +29,9 @@ module.exports = {
 
   "getGroup": function getAllGroups(id, fields) {
     if (fields.constructor !== Array) {
-      fields = getDefaultGroupFields();
+      fields = this.getDefaultGroupFields();
     }
-    return rp(createGetOptions(graphAPIUrl + id, fields))
+    return rp(common.createGetOptions(graphAPIUrl + id, fields))
     .then (function(data) {
       return JSON.parse(data);
     });
@@ -46,12 +45,12 @@ module.exports = {
   //TODO
   "getAllAlbums": function getAllAlbums(id, fields) {
     if (fields.constructor !== Array) {
-      fields = getDefaultMemberFields();
+      fields = this.getDefaultMemberFields();
     }    
     let url = graphAPIUrl + id + "/albums";
     let albums = [];
 
-    __getAllData(createGetOptions(url, fields), albums)
+    common.__getAllData(common.createGetOptions(url, fields), albums)
       .then (function(albums) {
         return JSON.parse(albums);
       });
@@ -60,12 +59,12 @@ module.exports = {
   //TODO
   "getAllDocs": function getAllDocs(id, fields) {
     if (fields.constructor !== Array) {
-      fields = getDefaultMemberFields();
+      fields = this.getDefaultMemberFields();
     }    
     let url = graphAPIUrl + id + "/docs";
     let docs = [];
 
-    __getAllData(createGetOptions(url, fields), docs)
+    common.__getAllData(common.createGetOptions(url, fields), docs)
       .then (function(docs) {
         return JSON.parse(docs);
       });
@@ -74,12 +73,12 @@ module.exports = {
   //TODO
   "getAllEvents": function getAllEvents(id, fields) {
     if (fields.constructor !== Array) {
-      fields = getDefaultMemberFields();
+      fields = this.getDefaultMemberFields();
     }    
     let url = graphAPIUrl + id + "/events";
     let events = [];
 
-    __getAllData(createGetOptions(url, fields), events)
+    common.__getAllData(common.createGetOptions(url, fields), events)
       .then (function(events) {
         return JSON.parse(events);
       });
@@ -88,12 +87,12 @@ module.exports = {
   //TODO
   "getAllFeed": function getAllFeed(id, fields) {
     if (fields.constructor !== Array) {
-      fields = getDefaultMemberFields();
+      fields = this.getDefaultMemberFields();
     }    
     let url = graphAPIUrl + id + "/feed";
     let feed = [];
 
-    __getAllData(createGetOptions(url, fields), feed)
+    common.__getAllData(common.createGetOptions(url, fields), feed)
       .then (function(feed) {
         return JSON.parse(feed);
       });
@@ -102,12 +101,12 @@ module.exports = {
   //TODO
   "getAllFiles": function getAllFiles(id, fields) {
     if (fields.constructor !== Array) {
-      fields = getDefaultMemberFields();
+      fields = this.getDefaultMemberFields();
     }    
     let url = graphAPIUrl + id + "/files";
     let files = [];
 
-    __getAllData(createGetOptions(url, fields), files)
+    common.__getAllData(common.createGetOptions(url, fields), files)
       .then (function(files) {
         return JSON.parse(files);
       });
@@ -125,54 +124,5 @@ module.exports = {
     return member.getEdgeMembers(url, fields);
   }, 
 };
-function __getAllData(options, data) {
-  let deferred = Promise.defer();
-  request(options).then(res => {
-    var response = JSON.parse(res);
-    
-    data.push(response.data);
-    if (response.paging && response.paging.next){
-        options.url = response.paging.next;
-        __getAllData(options, data)
-        .then(function() {
-            deferred.resolve();
-        });
-    } else {
-        deferred.resolve();
-    }
-  });
-  return deferred.promise;
-}
 
-function createGetOptions(url, fields){
-  return {
-    url: url,
-    qs: {
-      fields: fields.join(),
-    },
-    headers: {
-      'Authorization': config.page_access_token,
-    },
-    method: "GET",
-  };
-}
-
-function postMessage(sender, messageData) {
-    request({
-      url: graphAPIMessageUrl,
-      qs: { access_token: config.page_access_token, },
-      method: "POST",
-      json: {
-        recipient: { id: sender, },
-        message: messageData,
-      },
-    }, function(error, response) {
-        if(error) {
-            console.log("Error sending messages: ", error);
-        }
-        else if(response.body.error) {
-            console.log("Error: ", response.body.error);
-        }
-    });
-}
 
