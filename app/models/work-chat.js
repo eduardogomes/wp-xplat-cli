@@ -20,14 +20,14 @@ module.exports = {
     });
   },
 
-  sendTextMessage: function sendTextMessage(sender, text) {
+  "sendTextMessage": function sendTextMessage(sender, text) {
     let messageData = {
       text: text,
     };
     postMessage(sender, messageData);
   },
 
-  sendAudioMessage: function sendAudioMessage(sender, audioUrl) {
+  "sendAudioMessage": function sendAudioMessage(sender, audioUrl) {
     let messageData = {
       attachment:{
         type: "audio",
@@ -39,7 +39,7 @@ module.exports = {
     postMessage(sender, messageData);
   },
 
-  sendFileMessage: function sendFile(sender, fileUrl) {
+  "sendFileMessage": function sendFile(sender, fileUrl) {
     let messageData = {
       attachment:{
         type: "file",
@@ -51,7 +51,7 @@ module.exports = {
     postMessage(sender, messageData);
   },
 
-  sendVideoMessage: function sendVideo(sender, videoUrl) {
+  "sendVideoMessage": function sendVideo(sender, videoUrl) {
     let messageData = {
       attachment:{
         type: "video",
@@ -63,7 +63,7 @@ module.exports = {
     postMessage(sender, messageData);
   },
 
-  sendImageMessage: function sendImage(sender, imageUrl) {
+  "sendImageMessage": function sendImage(sender, imageUrl) {
     let messageData = {
       attachment:{
         type: "image",
@@ -75,7 +75,7 @@ module.exports = {
     postMessage(sender, messageData);
   },
 
-  createWebUrlTemplate: function createWebUrlTemplate (url, title) {
+  "createWebUrlTemplate": function createWebUrlTemplate (url, title) {
       return {
         type: "web_url",
         url: url,
@@ -83,7 +83,7 @@ module.exports = {
       };
   }, 
 
-  createPostbackTemplate: function createPostbackTemplate (title, payload) {
+  "createPostbackTemplate": function createPostbackTemplate (title, payload) {
     return {
       type: "postback",
       title: title,
@@ -91,7 +91,7 @@ module.exports = {
     };
   }, 
 
-  sendButtonsTemplate: function sendButtonsTemplate(sender, text, buttons) {
+  "sendButtonsTemplate": function sendButtonsTemplate(sender, text, buttons) {
     let messageData = {
       attachment:{
         type: "template",
@@ -105,7 +105,7 @@ module.exports = {
     postMessage(sender, messageData);
   },
 
-  createCardTemplate: function createCardTemplate (title, subtitle, imageUrl, buttons) {
+  "createCardTemplate": function createCardTemplate (title, subtitle, imageUrl, buttons) {
     return {
       "title": title,
       "subtitle": subtitle,
@@ -114,7 +114,7 @@ module.exports = {
     };
   }, 
 
-  createTextQuickReply: function createTextQuickReply (title, payload, imageUrl) {
+  "createTextQuickReply": function createTextQuickReply (title, payload, imageUrl) {
     let template = {
       "content_type": "text",
       "title": title,
@@ -126,13 +126,13 @@ module.exports = {
     return template;
   }, 
 
-  createLocationQuickReply: function createLocationQuickReply () {
+  "createLocationQuickReply": function createLocationQuickReply () {
     return {
       "content_type": "location",
     };
   }, 
   
-  sendGenericTemplate: function sendGenericTemplate(sender, cards) {
+  "sendGenericTemplate": function sendGenericTemplate(sender, cards) {
     let messageData = {
       "attachment": {
         "type": "template",
@@ -144,11 +144,11 @@ module.exports = {
     };
     postMessage(sender, messageData);
   },
-  createSenderActionMarkSeen: () => { return "mark_seen"; },
-  createSenderActionTypingOn: () => { return "typing_on"; },
-  createSenderActionTypingOff: () => { return "typing_off"; },
+  "createSenderActionMarkSeen": () => { return "mark_seen"; },
+  "createSenderActionTypingOn": () => { return "typing_on"; },
+  "createSenderActionTypingOff": () => { return "typing_off"; },
   
-  sendSenderAction: function sendSenderAction(sender, action){
+  "sendSenderAction": function sendSenderAction(sender, action){
     request({
       url: graphAPIMessageUrl,
       qs: { access_token: config.page_access_token, },
