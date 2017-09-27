@@ -1,7 +1,8 @@
 var config = require("../../config/config"),
     group = require("group"),
     member = require("member"), 
-    common = require("common");
+    common = require("common"), 
+    rp = require("request-promise");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
@@ -32,6 +33,20 @@ module.exports = {
   "getAllMembers": function getAllMembers(fields) {
     let url = graphAPIUrl + "community/members";
     return member.getEdgeMembers(url, fields);
+  },
+
+  "createNewGroup": function createNewGroup(name, description, privacy, cover_url) {
+    let url = graphAPIUrl + "community/groups";
+    let qs = {
+                "name": name,
+                "description": description, 
+                "privacy": privacy,
+                "cover_url": encodeURI(cover_url),
+              };
+    return rp(common.createPostOptions(url,qs))
+    .then (function(data) {
+      return JSON.parse(data);
+    });
   },
 };
 

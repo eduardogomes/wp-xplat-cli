@@ -1,5 +1,6 @@
 var common = require("common"), 
-    event = require("event");
+    event = require("event"),
+    post = require("post");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
@@ -30,6 +31,7 @@ module.exports = {
       "administrator",
     ];
   },
+
   "getEdgeMembers": function getEdgeMembers(url, fields) {
     if (fields.constructor !== Array) {
       fields = this.getDefaultMemberFields();
@@ -47,13 +49,20 @@ module.exports = {
     return event.getEdgeEvents(url, fields);
   },  
   
-  //TODO: /feed
+  "getAllFeed": function getAllFeed(id, fields) {
+    let url = graphAPIUrl + id + "/feed";
+    return post.getEdgePosts(url, fields);
+  },  
+  
+  //TODO: /conversations edge requires an impersonation token, not exposing in the model if no alternate solution available
 
-  //TODO: /conversations
+  "getAllManagers": function getAllManagers(id, fields) {
+    let url = graphAPIUrl + id + "/managers";
+    return this.getEdgeMembers(url, fields);
+  },
 
-  //TODO: /managers
-
-  //TODO: /reports
-
-  //TODO: /picture
+  "getAllReports": function getAllReports(id, fields) {
+    let url = graphAPIUrl + id + "/reports";
+    return this.getEdgeMembers(url, fields);
+  },
 };

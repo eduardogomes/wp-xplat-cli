@@ -34,7 +34,16 @@ module.exports = {
       method: "GET",
     };
   },
-  
+  "createPostOptions": function createPostOptions(url, qs){
+    return {
+      url: url,
+      qs: qs,
+      headers: {
+        "Authorization": config.page_access_token,
+      },
+      method: "POST",
+    };
+  },
   "postMessage": function postMessage(url, sender, messageData) {
       request({
         url: url,

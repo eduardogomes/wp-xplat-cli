@@ -1,7 +1,5 @@
 var common = require("common");
 
-//const graphAPIUrl = "https://graph.facebook.com/v2.6/";
-
 module.exports = {
   "getAvailableEventFields": function getAvailableEventFields(){
     return [

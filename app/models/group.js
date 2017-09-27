@@ -1,7 +1,11 @@
 var member = require("member"), 
     rp = require("request-promise"),
     common = require("common"), 
-    event = require("events");
+    event = require("event"), 
+    album = require("album"),
+    doc = require("doc"),
+    post = require("post"),
+    file = require("file");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
@@ -43,32 +47,14 @@ module.exports = {
     return member.getEdgeMembers(url, fields);
   },
 
-  //TODO
   "getAllAlbums": function getAllAlbums(id, fields) {
-    if (fields.constructor !== Array) {
-      fields = this.getDefaultMemberFields();
-    }    
     let url = graphAPIUrl + id + "/albums";
-    let albums = [];
-
-    common.__getAllData(common.createGetOptions(url, fields), albums)
-      .then (function(albums) {
-        return JSON.parse(albums);
-      });
+    return album.getEdgeAlbums(url, fields);
   },
 
-  //TODO
   "getAllDocs": function getAllDocs(id, fields) {
-    if (fields.constructor !== Array) {
-      fields = this.getDefaultMemberFields();
-    }    
     let url = graphAPIUrl + id + "/docs";
-    let docs = [];
-
-    common.__getAllData(common.createGetOptions(url, fields), docs)
-      .then (function(docs) {
-        return JSON.parse(docs);
-      });
+    return doc.getEdgeDocs(url, fields);
   },  
 
   "getAllEvents": function getAllEvents(id, fields) {
@@ -76,45 +62,43 @@ module.exports = {
     return event.getEdgeEvents(url, fields);
   },  
 
-  //TODO
   "getAllFeed": function getAllFeed(id, fields) {
-    if (fields.constructor !== Array) {
-      fields = this.getDefaultMemberFields();
-    }    
     let url = graphAPIUrl + id + "/feed";
-    let feed = [];
-
-    common.__getAllData(common.createGetOptions(url, fields), feed)
-      .then (function(feed) {
-        return JSON.parse(feed);
-      });
+    return post.getEdgePosts(url, fields);
   },
 
-  //TODO
   "getAllFiles": function getAllFiles(id, fields) {
-    if (fields.constructor !== Array) {
-      fields = this.getDefaultMemberFields();
-    }    
     let url = graphAPIUrl + id + "/files";
-    let files = [];
-
-    common.__getAllData(common.createGetOptions(url, fields), files)
-      .then (function(files) {
-        return JSON.parse(files);
-      });
+    return file.getEdgeFiles(url, fields);
   }, 
+
   "getAllMemberRequests": function getAllMemberRequests(id, fields) {
     let url = graphAPIUrl + id + "/member_requests";
     return member.getEdgeMembers(url, fields);
-  }, 
+  },
+   
   "getAllMembers": function getAllMembers(id, fields) {
     let url = graphAPIUrl + id + "/members";
     return member.getEdgeMembers(url, fields);
-  }, 
+  },
+
   "getAllModerators": function getAllModerators(id, fields) {
     let url = graphAPIUrl + id + "/moderators";
     return member.getEdgeMembers(url, fields);
   }, 
+
+  // Cover cannot be changed after set by the user
+  "updateGroup": function updateGroup(id, name, description) {
+    let url = graphAPIUrl + id;
+    let qs =  {
+                "name": name,
+                "description": description, 
+              };
+    return rp(common.createPostOptions(url,qs))
+    .then (function(data) {
+      return JSON.parse(data);
+    });
+  },
 };
 
 

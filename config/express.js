@@ -3,7 +3,7 @@ var express = require('express'),
     logger = require('morgan'),
     bodyParser = require('body-parser'),
     compress = require('compression'),
-    methodOverride = require('method-override'),
+    methodOverride = require('method-override');
 
 module.exports = function(app, config) {
   var env = config.env || 'development';
