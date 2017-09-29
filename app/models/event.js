@@ -1,4 +1,4 @@
-var common = require("common");
+var common = require("./common.js");
 
 module.exports = {
   "getAvailableEventFields": function getAvailableEventFields(){
@@ -19,9 +19,6 @@ module.exports = {
     }    
     let events = [];
 
-    common.__getAllData(common.createGetOptions(url, fields), events)
-      .then (function(events) {
-        return JSON.parse(events);
-      });
+    return common.__getAllData(common.createGetOptions(url, fields), events);
   }, 
 };

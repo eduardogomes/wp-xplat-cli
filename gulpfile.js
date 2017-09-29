@@ -3,7 +3,8 @@ var gulp = require('gulp'),
   plumber = require('gulp-plumber'),
   livereload = require('gulp-livereload'),
   eslint = require('gulp-eslint'),
-  stylus = require('gulp-stylus');
+  stylus = require('gulp-stylus'), 
+  mocha = require('gulp-mocha');
 
 gulp.task('develop', function () {
   livereload.listen();
@@ -45,6 +46,12 @@ gulp.task('lint', function () {
     .pipe(eslint.failAfterError());
 });
 
+gulp.task('test', function () {
+  return gulp.src('tests/**/*.js')
+    .pipe(mocha());
+});
+
 gulp.task('build', [
-  'lint'
+  'lint',
+  'test'
 ]);

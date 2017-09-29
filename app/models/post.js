@@ -1,5 +1,5 @@
-var reaction = require("reaction"), 
-    common = require("common");
+var reaction = require("./reaction.js"), 
+    common = require("./common.js");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
@@ -53,7 +53,6 @@ module.exports = {
       "target",
       "title",
       "type",
-      "type",
       "url",
     ];
   },
@@ -64,10 +63,7 @@ module.exports = {
     }    
     let posts = [];
 
-    common.__getAllData(common.createGetOptions(url, fields), posts)
-      .then (function(posts) {
-        return JSON.parse(posts);
-      });
+    return common.__getAllData(common.createGetOptions(url, fields), posts);
   }, 
 
   "getAllLikes": function getAllLikes(id, fields) {
@@ -92,10 +88,7 @@ module.exports = {
     }    
     let url = graphAPIUrl + id + "/attachments";
     let attachments = [];
-    common.__getAllData(common.createGetOptions(url, fields), attachments)
-    .then (function(attachments) {
-      return JSON.parse(attachments);
-    });
+    return common.__getAllData(common.createGetOptions(url, fields), attachments);
   },
 };
 

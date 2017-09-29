@@ -1,6 +1,6 @@
 
-var config = require("../../config/config"),
-    request = require("request");
+var config = require("../../config/config.js"),
+    request = require("request-promise");
 
 module.exports = {
     
@@ -9,16 +9,18 @@ module.exports = {
     request(options).then(res => {
       var response = JSON.parse(res);
       
-      data.push(response.data);
+      data = data.concat(response.data);
       if (response.paging && response.paging.next){
           options.url = response.paging.next;
           __getAllData(options, data)
           .then(function() {
-              deferred.resolve();
+              deferred.resolve(data);
           });
       } else {
-          deferred.resolve();
+          deferred.resolve(data);
       }
+    }).catch(err => {
+      deferred.reject(err);
     });
     return deferred.promise;
   },

@@ -1,11 +1,11 @@
-var member = require("member"), 
+var member = require("./member.js"), 
     rp = require("request-promise"),
-    common = require("common"), 
-    event = require("event"), 
-    album = require("album"),
-    doc = require("doc"),
-    post = require("post"),
-    file = require("file");
+    common = require("./common.js"), 
+    event = require("./event.js"), 
+    album = require("./album.js"),
+    doc = require("./doc.js"),
+    post = require("./post.js"),
+    file = require("./file.js");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
@@ -32,14 +32,11 @@ module.exports = {
     ];
   },
 
-  "getGroup": function getAllGroups(id, fields) {
+  "getGroup": function getGroup(id, fields) {
     if (fields.constructor !== Array) {
       fields = this.getDefaultGroupFields();
     }
-    return rp(common.createGetOptions(graphAPIUrl + id, fields))
-    .then (function(data) {
-      return JSON.parse(data);
-    });
+    return rp(common.createGetOptions(graphAPIUrl + id, fields));
   },
 
   "getAllAdmins": function getAllAdmins(id, fields) {

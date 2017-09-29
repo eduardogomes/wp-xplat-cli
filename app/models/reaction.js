@@ -1,4 +1,4 @@
-var common = require("common");
+var common = require("./common.js");
 
 module.exports = {
   "getAvailableReactionFields": function getAvailableReactionFields(){
@@ -15,9 +15,6 @@ module.exports = {
     }    
     let reactions = [];
 
-    common.__getAllData(common.createGetOptions(url, fields), reactions)
-      .then (function(reactions) {
-        return JSON.parse(reactions);
-      });
+    return common.__getAllData(common.createGetOptions(url, fields), reactions);
   }, 
 };
