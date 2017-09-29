@@ -1,14 +1,27 @@
 var express = require('express'),
     glob = require('glob'),
+    favicon = require('serve-favicon'),
     logger = require('morgan'),
     bodyParser = require('body-parser'),
     compress = require('compression'),
-    methodOverride = require('method-override');
+    methodOverride = require('method-override'),
+    handleBars = require('express-handlebars');
 
 module.exports = function(app, config) {
   var env = config.env || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
+
+  app.engine('handlebars', handleBars({
+    layoutsDir: config.root + '/app/views/layouts/',
+    defaultLayout: 'main',
+    partialsDir: [config.root + '/app/views/partials/']
+  }));
+
+  app.set('views', config.root + '/app/views');
+  app.set('view engine', 'handlebars');
+
+  app.use(favicon(config.root + '/public/img/favicon.ico'));
 
   app.use(logger('dev'));
   app.use(bodyParser.json());
@@ -24,10 +37,10 @@ module.exports = function(app, config) {
     require(controller)(app);
   });
 
-  var helpers = glob.sync(config.root + '/app/helpers/*.js');
-  controllers.forEach(function (helper) {
-    require(helper)(app);
-  });
+  // var helpers = glob.sync(config.root + '/app/helpers/*.js');
+  // controllers.forEach(function (helper) {
+  //   require(helper)(app);
+  // });
 
   app.use(function (req, res, next) {
     var err = new Error('Not Found');

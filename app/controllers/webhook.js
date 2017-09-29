@@ -1,13 +1,13 @@
 var express = require("express"),
     router = express.Router(),
     config = require("../../config/config"),
-    fb = require("../helpers/work-chat");
+    fb = require("../models/work-chat");
 
 module.exports = function (app) {
   app.use("/", router);
 };
 
-// Facebook verification
+// Workplace token verification
 router.get("/webhook/", function (req, res) {
   if (req.query["hub.verify_token"] === config.verify_token) {
     res.send(req.query["hub.challenge"]);

@@ -1,14 +1,22 @@
-# 🤖 Bleep bloop, I'm a bot. Build your own Facebook Messenger bot.
+# 🤖 Bleep bloop, I'm a bot. Build your own Workplace Messenger bot.
 
-Some of the code snippets were taken from Facebook's [official documentation](https://developers.facebook.com/docs/messenger-platform/quickstart). The docs are concise, but not exactly easy follow if you haven't built a bot and hooked it up to your app or page before. Your best bet in general might be their [Complete Guide] (https://developers.facebook.com/docs/messenger-platform/implementation) for the Messenger platform.
+## What is Workplace?
 
+If you never heard about Workplace maybe you should start on the [top 10 questions about Workplace](https://workplaceblog.fb.com/news/workplace-questions/)
 
 ## What to expect
 
-Following along with this tutorial will leave you with a **live starter-app** that implements a Facebook Messenger bot. **Deployed to Heroku with a fun little landing page, persisting data, ready to rumble.** Along the way, you will also learn how to use Heroku's free tier for hacking on projects like this. It **should take between 15 and 30 minutes** depending on prior experience.
+When you want to create a custom integration for Workplace, you may find information on the [technical docs](https://developers.facebook.com/docs/workplace/integrations/custom-integrations) that are concise, but not exactly easy follow if you haven't built a bot and hooked it up to your app or page in Workplace or Facebook before. There is more information in the [Complete Guide for the Messenger platform] (https://developers.facebook.com/docs/messenger-platform/implementation) and the [Documentation for the Graph API](https://developers.facebook.com/docs/graph-api) but a new developer may find it overwhelming to start with. 
+
+The goal following this tutorial is having a **live stater-app** that implements the Workplace Webhook/Graph API bot. **Deployed to Heroku**,  along the way, you will also learn how to use Heroku's free tier for hacking on projects like this. It **should take between 15 and 30 minutes** depending on prior experience.
 
 
 ## The basics
+
+### Get your Company in a Workplace Premium Instance
+
+1. Custom integrations are only available on Premium tier, you can [sign up for a 90-day free trial](https://www.facebook.com/workplace/pricing/) using your corporate e-mail if your company still is not in Workplace. You are missing a lot of fun!
+
 
 ### Download, build and deploy the project
 
@@ -25,29 +33,28 @@ Following along with this tutorial will leave you with a **live starter-app** th
 4. Clone this project and switch into the project directory.
 
     ```
-    git clone https://github.com/Beavr/fb-chatbot-boilerplate.git
-    cd fb-chatbot-boilerplate
+    git clone https://github.com/eduardogomes/wp-chatbot-boilerplate-node
+    cd wp-chatbot-boilerplate
     ```
 
-5. Install Node dependencies. We are using [Express] (http://expressjs.com/) for serving stuff, the [Sequelize] (https://github.com/sequelize/sequelize) ORM for database-y stuff, [request] (https://github.com/request/request) and [request-promise] (https://github.com/request/request-promise) for sending and receiving messages, and [body-parser] (https://github.com/expressjs/body-parser) to process responses from Facebook's APIs.
+5. Install Node dependencies. We are using [Express] (http://expressjs.com/) for serving stuff, [request] (https://github.com/request/request) and [request-promise] (https://github.com/request/request-promise) for sending and receiving messages, and [body-parser] (https://github.com/expressjs/body-parser) to process responses from Workplace's APIs.
 
     ```
     npm install
     ```
 
-6. Create a new Heroku instance, deploy a [free database instance] (https://devcenter.heroku.com/articles/heroku-postgresql) for your server, and push the code to the cloud.  Database configuration happens automagically via Heroku's DATABASE_URL environment variable. We also set an environment variable called ```IS_HEROKU```, because this boilerplate works on any type of host but has some extra smarts for Heroku deployment.
+6. Create a new Heroku instance and push the code to the cloud.  We also set an environment variable called ```IS_HEROKU```, because this boilerplate works on any type of host but has some extra smarts for Heroku deployment.
 
     ```
     heroku create
     heroku config:set IS_HEROKU=1
-    heroku addons:create heroku-postgresql:hobby-dev
     git push heroku master
     ```  
 
-7. You should be all set and be able to visit your page at the URL that was output by ```$ heroku create```. You can show the database settings your app is using with the command ```$ heroku config```. You can use the login data to inspect the database with your favourite client to see what's going on.
+7. You should be all set and be able to visit your page at the URL that was output by ```$ heroku create```.
 
 
-### Setup your Facebook App
+### Setup your Workplace App
 
 1. Create or configure a Facebook App here (https://developers.facebook.com/apps/). (You also probably should set up a new Facebook Page while you're at it - don't use a page you are already using in production.)
 
