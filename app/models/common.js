@@ -46,16 +46,30 @@ module.exports = {
       method: "POST",
     };
   },
+  "createDeleteOptions": function createDeleteOptions(url, qs){
+    return {
+      url: url,
+      qs: qs,
+      headers: {
+        "Authorization": config.page_access_token,
+      },
+      method: "DELETE",
+    };
+  },
   "postMessage": function postMessage(url, sender, messageData) {
-      request({
-        url: url,
-        qs: { access_token: config.page_access_token, },
-        method: "POST",
-        json: {
-          recipient: { id: sender, },
-          message: messageData,
-        },
-      }, function(error, response) {
+    let options = {
+      url: url,
+      headers: {
+        "Authorization": config.page_access_token,
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      json: {
+        recipient: sender,
+        message: messageData,
+      },
+    };
+    return request(options, function(error, response) {
           if(error) {
               console.log("Error sending messages: ", error);
           }

@@ -72,13 +72,13 @@ The goal following this tutorial is having a **live stater-app** that implements
 
     ![Set up a Page Access Token](/public/img/documentation-img/create_access_token.png)
 
-5. Switch back to Terminal and use the following command to trigger your Facebbook app to start sending webhooks. Remember to use the Page Access Token you just created instead of the placeholder at the end of the request. 
+5. Switch back to Terminal and use the following command to trigger your Facebook app to start sending webhooks. Remember to use the Page Access Token you just created instead of the placeholder at the end of the request. 
 
     ```
     curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=<PAGE_ACCESS_TOKEN>"
     ```
 
-### Set the missing configuration values in your Heroku enviroment
+### Set the missing configuration values in your Heroku environment
 
 ```
 heroku config:set PAGE_ACCESS_TOKEN=your-page-access-token-here

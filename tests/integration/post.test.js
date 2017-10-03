@@ -13,7 +13,7 @@ describe("Post", function(){
         it("should return likes", function(done){                    
             post.getAllLikes(id, reaction.getAvailableReactionFields())
             .then((likes) => {
-                assert(likes.lenght != 0, "no likes found");
+                assert(likes.length != 0, "no likes found");
                 done();
             }).catch(done);
         });
@@ -22,7 +22,7 @@ describe("Post", function(){
         it("should return reactions", function(done){                    
             post.getAllReactions(id, reaction.getAvailableReactionFields())
             .then((reactions) => {
-                assert(reactions.lenght != 0, "no reactions found");
+                assert(reactions.length != 0, "no reactions found");
                 done();
             }).catch(done);
         });
@@ -31,7 +31,7 @@ describe("Post", function(){
         it("should return comments", function(done){                    
             post.getAllComments(id, post.getAvailableCommentFields())
             .then((comments) => {
-                assert(comments.lenght != 0, "no comments found");
+                assert(comments.length != 0, "no comments found");
                 done();
             }).catch(done);
         });
@@ -40,7 +40,7 @@ describe("Post", function(){
         it("should return attachments", function(done){                    
             post.getAllAttachments(id, post.getAvailableAttachmentFields())
             .then((attachments) => {
-                assert(attachments.lenght != 0, "no attachments found");
+                assert(attachments.length != 0, "no attachments found");
                 done();
             }).catch(done);
         });

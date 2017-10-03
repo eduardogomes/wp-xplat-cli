@@ -51,7 +51,12 @@ gulp.task('test', function () {
     .pipe(mocha());
 });
 
+gulp.task('unitTest', function () {
+  return gulp.src('tests/unit/*.js')
+    .pipe(mocha());
+});
+
 gulp.task('build', [
   'lint',
-  'test'
+  'unitTest'
 ]);

@@ -38,6 +38,7 @@
     "gulp-nodemon": "^2.0.2",
     "gulp-plumber": "^1.0.0",
     "gulp-stylus": "^2.0.0",
-    "mocha": "^3.5.3"
+    "mocha": "^3.5.3",
+    "sinon": "^4.0.0"
   }
 }
