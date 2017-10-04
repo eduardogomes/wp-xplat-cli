@@ -33,7 +33,7 @@ The goal following this tutorial is having a **live stater-app** that implements
 4. Clone this project and switch into the project directory.
 
     ```
-    git clone I 
+    git clone https://github.com/eduardogomes/wp-chatbot-boilerplate-node.git
     cd wp-chatbot-boilerplate
     ```
 
