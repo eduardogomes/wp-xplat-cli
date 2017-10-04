@@ -85,6 +85,8 @@ The project includes integration tests for most of available features in the Wor
 
     ![Boilerplate Workplace App Integration Tests](/public/img/documentation-img/integration_tests.png)
 
+You can execute the test yourself using the following command, remember to change the data in the ```.env``` file using your instance access token, verify token and app id. 
+
 ```
 gulp build
 ```
