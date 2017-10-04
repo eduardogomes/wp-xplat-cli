@@ -18,7 +18,7 @@
                 "request": "launch",
                 "name": "mocha",
                 "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-                "args": ["tests/unit/*.js", "--no-timeouts", "--colors"],
+                "args": ["tests/**/group.test.js", "--no-timeouts", "--colors"],
                 "env":{
                     "FB_APP_ID": "1901800013169369",
                     "FB_PAGE_ID": "Beaver-Bot-1945229675744033",

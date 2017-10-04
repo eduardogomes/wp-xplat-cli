@@ -21,7 +21,7 @@ module.exports = {
     ];
   },
 
-  "getDefatulAlbumFields": function getDefatulAlbumFields(){
+  "getDefaultAlbumFields": function getDefaultAlbumFields(){
     return [
       "id", 
       "created_time", 
@@ -31,7 +31,7 @@ module.exports = {
 
   "getEdgeAlbums": function getEdgeAlbums(url, fields) {
     if (fields.constructor !== Array) {
-      fields = this.getDefatulAlbumFields();
+      fields = this.getDefaultAlbumFields();
     }    
     let events = [];
 

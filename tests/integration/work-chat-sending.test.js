@@ -4,16 +4,9 @@ var assert = require("assert"),
     request = require("request-promise");
 
 describe("Work chat", function(){
-    // before(function(){
-    //     sinon
-    //         .stub(request, "defaults")
-    //         .yields(null, null, {id: 1})
-    // });
-    // after(function(){
-    //     request.restore();
-    // });
+    //TODO: Setup test using env variable/create test resource
     let id = 100020029960461;
-    /*
+    
     describe("Basic Content Types", function(){
         it("should sendTextMessage", function(done){  
             let sender = workChat.createSenderFromId(id);
@@ -37,7 +30,7 @@ describe("Work chat", function(){
                 assert(res.recipient_id != 0, "invalid response");
                 done();
             }).catch(done);
-        });
+        }).timeout(5000); //likely slower;;
         
         it("should sendVideoMessage", function(done){           
             let url = "https://video.xx.fbcdn.net/v/t43.1792-2/17879150_683278481855855_7153571496697266176_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InN2ZV9oZCJ9&_nc_log=1&oh=4753a971dcc411286444f88cb499d7d6&oe=59D6A8EC";  
@@ -56,7 +49,7 @@ describe("Work chat", function(){
                 done();
             }).catch(done);
         }).timeout(5000); //likely slower;
-    });*/
+    });
     
     describe("Quick Replies", function(){
         it("should send text quick replies", function(done){           
@@ -68,7 +61,7 @@ describe("Work chat", function(){
                 assert(res.recipient_id != 0, "invalid response");
                 done();
             }).catch(done);
-        });
+        }).timeout(5000); //likely slower;;
         it("should send image quick replies", function(done){                    
             let replies = [];
             replies.push(workChat.createTextQuickReply("Yes", {yes: true}, "https://fb.facebook.com/favicon.ico"));    
@@ -78,7 +71,7 @@ describe("Work chat", function(){
                 assert(res.recipient_id != 0, "invalid response");
                 done();
             }).catch(done);
-        });
+        }).timeout(5000); //likely slower;;
         it("should send location quick reply", function(done){                    
             let replies = [];
             replies.push(workChat.createLocationQuickReply("Yes", null, null));    
@@ -87,7 +80,7 @@ describe("Work chat", function(){
                 assert(res.recipient_id != 0, "invalid response");
                 done();
             }).catch(done);
-        });
+        }).timeout(5000); //likely slower;;
         it("should send multiple quick replies", function(done){                    
             let replies = [];
             replies.push(workChat.createTextQuickReply("Yes", {yes: true}, "https://fb.facebook.com/favicon.ico"));    
@@ -98,7 +91,7 @@ describe("Work chat", function(){
                 assert(res.recipient_id != 0, "invalid response");
                 done();
             }).catch(done);
-        });
+        }).timeout(5000); //likely slower;;
     });
     
     describe("Templates", function(){
@@ -111,7 +104,7 @@ describe("Work chat", function(){
                 assert(res.recipient_id != 0, "invalid response");
                 done();
             }).catch(done);
-        });
+        }).timeout(5000); //likely slower;;
         
         it("should send PostBackTemplate", function(done){                    
             let buttons = [];

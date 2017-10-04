@@ -1,4 +1,5 @@
 var reaction = require("./reaction.js"), 
+    rp = require("request-promise"),
     common = require("./common.js");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
@@ -90,5 +91,12 @@ module.exports = {
     let attachments = [];
     return common.__getAllData(common.createGetOptions(url, fields), attachments);
   },
+  "comment": function comment(id, message) {
+    let url = graphAPIUrl + id + "/comments";
+    let qs =  {
+      "message": message,
+    };
+    return rp(common.createPostOptions(url, qs));
+  },  
 };
 

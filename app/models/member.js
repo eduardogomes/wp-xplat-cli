@@ -62,4 +62,8 @@ module.exports = {
     let url = graphAPIUrl + id + "/reports";
     return this.getEdgeMembers(url, fields);
   },
+
+  "createMemberTag": function createMemberTag(id) {
+    return "@[" + id + "]";
+  },
 };

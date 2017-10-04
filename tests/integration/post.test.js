@@ -4,7 +4,9 @@ var assert = require("assert"),
     reaction = require("../../app/models/reaction"),
     request = require("request-promise");
 
+//TODO: Setup test using env variable/create test resource
 let id = "1958444081104480_1989628914652663";
+let memberId2 = "100020029960461";
 describe("Post", function(){
     before(function(){
 
@@ -44,5 +46,15 @@ describe("Post", function(){
                 done();
             }).catch(done);
         });
+    });
+    describe("comment", function(){
+        it("should comment", function(done){      
+            let msg = "Hi " + member.createMemberTag(memberId2);              
+            post.comment(id, msg)
+            .then((res) => {
+                assert(res.id != 0, "no comments found");
+                done();
+            }).catch(done);
+        }).timeout(5000);
     });
 });

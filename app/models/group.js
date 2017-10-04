@@ -84,18 +84,59 @@ module.exports = {
     return member.getEdgeMembers(url, fields);
   }, 
 
-  // Cover cannot be changed after set by the user
+  // Cover cannot be changed after changed by the user
   "updateGroup": function updateGroup(id, name, description) {
     let url = graphAPIUrl + id;
     let qs =  {
                 "name": name,
                 "description": description, 
               };
-    return rp(common.createPostOptions(url,qs))
-    .then (function(data) {
-      return JSON.parse(data);
-    });
+    return rp(common.createPostOptions(url,qs));
   },
+
+  "addMemberToGroupById": function addMemberToGroupById(id, memberId) {
+    let url = graphAPIUrl + id + "/members/" +  memberId;
+    return rp(common.createPostOptions(url,null));
+  },
+  "addMemberToGroupByEmail": function addMemberToGroupByEmail(id, email) {
+    let url = graphAPIUrl + id + "/members";
+    let qs =  {
+      "email": email,
+    };
+    return rp(common.createPostOptions(url,qs));
+  },
+  "removeMemberToGroupById": function removeMemberToGroupById(id, memberId) {
+    let url = graphAPIUrl + id + "/members/" +  memberId;
+    return rp(common.createDeleteOptions(url,null));
+  },
+  "removeMemberToGroupByEmail": function removeMemberToGroupByEmail(id, email) {
+    let url = graphAPIUrl + id + "/members";
+    let qs =  {
+      "email": email,
+    };
+    return rp(common.createDeleteOptions(url,qs));
+  },
+  "promoteMemberToAdmin": function promoteMemberToAdmin(id, memberId) {
+    let url = graphAPIUrl + id + "/admins/" +  memberId;
+    return rp(common.createPostOptions(url,null));
+  },
+  "demoteMemberToAdmin": function demoteMemberToAdmin(id, memberId) {
+    let url = graphAPIUrl + id + "/admins/" +  memberId;
+    return rp(common.createDeleteOptions(url,null));
+  },  
+  "post": function post(id, message, link, isMarkdown) {
+    let url = graphAPIUrl + id + "/feed";
+    let qs =  {
+      "message": message,
+    };
+    if (link){
+      qs.link = link;
+    }
+    if (isMarkdown){
+      qs.formatting = "MARKDOWN";
+    }
+    return rp(common.createPostOptions(url, qs));
+  },  
 };
 
 

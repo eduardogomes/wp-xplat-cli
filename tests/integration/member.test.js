@@ -4,6 +4,7 @@ var assert = require("assert"),
     event = require("../../app/models/event"),
     request = require("request-promise");
 
+//TODO: Setup test using env variable/create test resource
 let id = "100020029960461";
 describe("Member", function(){
     before(function(){
@@ -13,7 +14,7 @@ describe("Member", function(){
         it("should return manager", function(done){                    
             member.getAllManagers(id, member.getDefaultMemberFields())
             .then((admins) => {
-                assert(admins.lenght != 0, "no managers found");
+                assert(admins.length == 0, "user should have no managers");
                 done();
             }).catch(done);
         });
@@ -22,7 +23,7 @@ describe("Member", function(){
         it("should return members", function(done){                    
             member.getAllReports(id, member.getDefaultMemberFields())
             .then((members) => {
-                assert(members.lenght != 0, "no members found");
+                assert(members.length == 0, "user should have no reports");
                 done();
             }).catch(done);
         });
@@ -31,16 +32,16 @@ describe("Member", function(){
         it("should return feed", function(done){                    
             member.getAllFeed(id, post.getDefaultPostFields())
             .then((feed) => {
-                assert(feed.lenght != 0, "no feed found");
+                assert(feed.length != 0, "no feed found");
                 done();
             }).catch(done);
-        }).timeout(5000); //likely slower
+        }).timeout(20000); //likely slower
     });
     describe("getAllEvents", function(){
         it("should return events", function(done){                    
             member.getAllEvents(id, event.getAvailableEventFields())
             .then((events) => {
-                assert(events.lenght != 0, "no event found");
+                assert(events.length != 0, "no event found");
                 done();
             }).catch(done);
         });

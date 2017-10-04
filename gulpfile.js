@@ -58,5 +58,5 @@ gulp.task('unitTest', function () {
 
 gulp.task('build', [
   'lint',
-  'unitTest'
+  'test'
 ]);

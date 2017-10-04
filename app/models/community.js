@@ -32,6 +32,10 @@ module.exports = {
               };
     return rp(common.createPostOptions(url,qs));
   },
+  "getGroupPrivacyOpen": () => { return "OPEN"; },
+  "getGroupPrivacyClosed": () => { return "CLOSED"; },
+  "getGroupPrivacySecret": () => { return "SECRET"; },
+  
 };
 
 
