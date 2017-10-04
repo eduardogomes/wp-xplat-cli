@@ -37,7 +37,7 @@ The goal following this tutorial is having a **live stater-app** that implements
     cd wp-chatbot-boilerplate
     ```
 
-5. Install Node dependencies. We are using [Express] (http://expressjs.com/) for serving stuff, [request] (https://github.com/request/request) and [request-promise] (https://github.com/request/request-promise) for sending and receiving messages, and [body-parser] (https://github.com/expressjs/body-parser) to process responses from Workplace's APIs.
+5. Install Node dependencies. We are using [Express] (http://expressjs.com/) for serving stuff, [request] (https://github.com/request/request) and [request-promise] (https://github.com/request/request-promise) for sending and receiving messages, and some other packages.
 
     ```
     npm install
@@ -56,27 +56,16 @@ The goal following this tutorial is having a **live stater-app** that implements
 
 ### Setup your Workplace App
 
-1. Create or configure a Facebook App here (https://developers.facebook.com/apps/). (You also probably should set up a new Facebook Page while you're at it - don't use a page you are already using in production.)
+1. In the Company Dashboard, open the Integrations tab.
+2. Click on the Create App button.
+3. Choose a relevant name and description for the app.
+  ![Create a new Workplace App](/public/img/documentation-img/create_new_integration.png)
 
-    ![Create a new Facebook App](/public/img/documentation-img/create_new_app.png)
+4. Add a profile picture for the app. This will be used any time the app is visually represented, for instance if it makes a post to group.
+5. Choose the required [permissions](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions) for the app, based on the integration functionality you require.
+    ![Create a new Workplace App](https://scontent.xx.fbcdn.net/v/t39.2365-6/20685793_1909958639254743_3389435426606415872_n.png?_nc_log=1&oh=87e3b8e9d7183ddea4d930a4e661e95a&oe=5A3F9CE2)
 
-2. In the app, switch to the *Messenger* tab and click *Setup Webhook*. Enter the URL of your Heroku instance and append */webhook/*. (For example: *https://mighty-island-93912.herokuapp.com/webhook/*. It needs to be https://). Make sure you check all the subscription fields. Also create and enter a verify-token. Keep this safe.
-
-    ![Set up your bot's webhook URL](/public/img/documentation-img/webhook_subscription_1.png)
-
-3. Configure to which of your pages' events the app should subscribe to.
-
-    ![Create a new Facebook App](/public/img/documentation-img/webhook_subscription_2.png)
-
-4. Create a Page Access Token and keep it safe. Be sure to pick the same page you picked in step three.
-
-    ![Set up a Page Access Token](/public/img/documentation-img/create_access_token.png)
-
-5. Switch back to Terminal and use the following command to trigger your Facebook app to start sending webhooks. Remember to use the Page Access Token you just created instead of the placeholder at the end of the request. 
-
-    ```
-    curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=<PAGE_ACCESS_TOKEN>"
-    ```
+6. Copy and safely store the [access token](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions#appaccesstoken) that's shown to you. You'll need this when making API calls.
 
 ### Set the missing configuration values in your Heroku environment
 
@@ -84,15 +73,23 @@ The goal following this tutorial is having a **live stater-app** that implements
 heroku config:set PAGE_ACCESS_TOKEN=your-page-access-token-here
 heroku config:set VERIFY_TOKEN=your-verify-token-here
 heroku config:set FB_APP_ID=your-app-id-here
-heroku config:set FB_PAGE_ID=your-page-id-here
 ```
 
-```FB_APP_ID``` is the app ID of the Facebook App you just created. You can find it directly on the app dashboard. ```FB_PAGE_ID``` is the page ID of the Facebook Page you subscribed to in the app settings. ([Click here] (http://hellboundbloggers.com/2010/07/find-facebook-profile-and-page-id-8516/) in case you don't know how to find it.)
+```FB_APP_ID``` is the app ID of the Workplace App you just created. You can find it directly on the integration details screen. 
 
-# ⇨ Visit the landing page at the root of your Heroku instance and start chatting. 🤖
+### Check it out our integration tests
+
+The project includes integration tests for most of available features in the Workplace API, and you can understand better how to implement your bot interactions.
+
+    ![Boilerplate Workplace App Integration Tests](/public/img/documentation-img/integration)tests.png)
+
+```
+gulp build
+```
+
+
+# ⇨ Go to your Workplace instance find your bot and start chatting. 🤖
 
 ## OK, so what now?
-
-If you want to make your bot available publicly, you will have to go through Facebook's [app review process] (https://developers.facebook.com/docs/messenger-platform/app-review) for Messenger bots.
 
 [Wit.ai](https://wit.ai) is a service that lets you easily create text or voice based bots that humans can chat with on their preferred messaging platform. Basic wit.ai functionality will be baked into this starter app at some point in the future.
