@@ -33,7 +33,7 @@ The goal following this tutorial is having a **live stater-app** that implements
 4. Clone this project and switch into the project directory.
 
     ```
-    git clone https://github.com/eduardogomes/wp-chatbot-boilerplate-node
+    git clone I 
     cd wp-chatbot-boilerplate
     ```
 
@@ -81,7 +81,7 @@ heroku config:set FB_APP_ID=your-app-id-here
 
 The project includes integration tests for most of available features in the Workplace API, and you can understand better how to implement your bot interactions.
 
-    ![Boilerplate Workplace App Integration Tests](/public/img/documentation-img/integration)tests.png)
+    ![Boilerplate Workplace App Integration Tests](/public/img/documentation-img/integration_tests.png)
 
 ```
 gulp build
