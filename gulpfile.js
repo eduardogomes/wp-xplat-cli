@@ -23,22 +23,6 @@ gulp.task('develop', function () {
   });
 });
 
-gulp.task('develop-no-rl', function () {
-  nodemon({
-    script: 'app.js',
-    ext: 'js coffee handlebars',
-    stdout: false
-  }).on('readable', function () {
-    this.stdout.on('data', function (chunk) {
-      if(/^Express server listening on port/.test(chunk)){
-        livereload.changed(__dirname);
-      }
-    });
-    this.stdout.pipe(process.stdout);
-    this.stderr.pipe(process.stderr);
-  });
-});
-
 gulp.task('lint', function () {
   return gulp.src('app/**')
     .pipe(eslint())

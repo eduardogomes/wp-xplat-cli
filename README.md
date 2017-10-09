@@ -65,9 +65,14 @@ The goal following this tutorial is having a **live stater-app** that implements
 4. Add a profile picture for the app. This will be used any time the app is visually represented, for instance if it makes a post to group.
 5. Choose the required [permissions](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions) for the app, based on the integration functionality you require.
 
-    ![Create a new Workplace App](https://scontent.xx.fbcdn.net/v/t39.2365-6/20685793_1909958639254743_3389435426606415872_n.png?_nc_log=1&oh=87e3b8e9d7183ddea4d930a4e661e95a&oe=5A3F9CE2)
+    ![Create a new Workplace App](/public/img/documentation-img/application-permissions.png)
 
 6. Copy and safely store the [access token](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions#appaccesstoken) that's shown to you. You'll need this when making API calls.
+
+7. Configure the messaging web hook with the Bot URL and the Verify Token (the same as the ```.env``` file)
+
+    ![Configure the Webhook](/public/img/documentation-img/webhook-config.png)
+        
 
 ### Set the missing configuration values in your Heroku environment
 
@@ -79,18 +84,36 @@ heroku config:set FB_APP_ID=your-app-id-here
 
 ```FB_APP_ID``` is the app ID of the Workplace App you just created. You can find it directly on the integration details screen. 
 
-### Check it out our integration tests
+### Check it out our integration tests and debug your bot
 
 The project includes integration tests for most of available features in the Workplace API, and you can understand better how to implement your bot interactions.
 
     ![Boilerplate Workplace App Integration Tests](/public/img/documentation-img/integration_tests.png)
 
-You can execute the test yourself using the following command, remember to change the data in the ```.env``` file using your instance access token, verify token and app id. 
+You will need to change the data in the ```.env``` file using your instance access token, verify token and app id. 
+```
+PAGE_ACCESS_TOKEN=Bearer <your access token>
+VERIFY_TOKEN=<your verify token>
+FB_PAGE_ID=<your app id>
+```
 
+Then you can execute the test yourself using the following command:
 ```
 gulp build
 ```
 
+When you need to debug your bot you may set the webhook in Workplace to your local environment. A simple way to do that is use localtunnel:
+
+- Install LocalTunnel using ```npm install localtunnel``` 
+- Run the app locally using ```gulp develop```
+- In another Terminal session, tunnel to the port 5000 using ```lt -p 5000```
+- Configure your webhook in Workplace using the url created by localtunnel
+```
+lt -p 5000
+your url is: https://mczugwjaps.localtunnel.me 
+```
+
+You can leave the tunnel open during all your debug session, but you will need to execute it again if you close the Terminal.
 
 # ⇨ Go to your Workplace instance find your bot and start chatting. 🤖
 
