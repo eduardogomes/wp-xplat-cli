@@ -69,12 +69,12 @@ The goal following this tutorial is having a **live stater-app** that implements
 
 6. Create, Copy and safely store the [access token](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions#appaccesstoken) that's shown to you. You'll need this when making API calls.
 
-7. Configure your environment variables. You will need to set the data on the ```.env``` file in the root directory with 
+7. Configure your environment variables. You will need to set the data on the ```.env``` file in your local wp-chatbot-boilerplate-node folder
 
 ```
 NODE_ENV=development
-PAGE_ACCESS_TOKEN=Bearer <access token, created on step 6>
-VERIFY_TOKEN=  <a unique string to identity your bot, e.g.: dev-workshop-bot-token>
+PAGE_ACCESS_TOKEN=Bearer <access token, created on step 6 in the format "Bearer TOKEN">
+VERIFY_TOKEN= <a unique string to identity your bot, e.g.: dev-workshop-bot-token>
 PORT=5000
 ```
 
@@ -91,33 +91,14 @@ heroku config:set VERIFY_TOKEN=your-verify-token-here
 ```
 
 
-### Check it out our integration tests and debug your bot
-
-The project includes integration tests for most of available features in the Workplace API, and you can understand better how to implement your bot interactions.
-
-    ![Boilerplate Workplace App Integration Tests](/public/img/documentation-img/integration_tests.png)
-
-
-Then you can execute the test yourself using the following command:
-```
-gulp build
-```
-
-When you need to debug your bot you may set the webhook in Workplace to your local environment. A simple way to do that is use localtunnel:
-
-- Install LocalTunnel using ```npm install localtunnel``` 
-- Run the app locally using ```gulp develop```
-- In another Terminal session, tunnel to the port 5000 using ```lt -p 5000```
-- Configure your webhook in Workplace using the url created by localtunnel
-```
-lt -p 5000
-your url is: https://mczugwjaps.localtunnel.me 
-```
-
-You can leave the tunnel open during all your debug session, but you will need to execute it again if you close the Terminal.
-
 # ⇨ Go to your Workplace instance find your bot and start chatting. 🤖
 
 ## OK, so what now?
 
-[Wit.ai](https://wit.ai) is a service that lets you easily create text or voice based bots that humans can chat with on their preferred messaging platform. Basic wit.ai functionality will be baked into this starter app at some point in the future.
+- Change the webhook.js file and deploy it to heroku (using ```git push heroku master```), after committing your changes in your local environment 
+
+- [Debug your bot](/public/debug.md) in your local environment
+
+- Create a [Cron like job](https://www.npmjs.com/package/cron) to message a user or post in a group
+
+- [Wit.ai](https://wit.ai) is a service that lets you easily create text or voice based bots that humans can chat with on their preferred messaging platform. Basic wit.ai functionality will be baked into this starter app at some point in the future.
