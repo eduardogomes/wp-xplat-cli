@@ -4,9 +4,13 @@ var assert = require("assert"),
     reaction = require("../../app/models/reaction"),
     request = require("request-promise");
 
-//TODO: Setup test using env variable/create test resource
-let id = "1958444081104480_1989628914652663";
-let memberId2 = "100020029960461";
+var path = require('path'),
+    rootPath = path.normalize(__dirname + '/..');
+
+var dotenv = require('dotenv').config({path: rootPath + '/.env'});
+
+let id = process.env.TEST_POST_ID;
+let memberId2 = process.env.TEST_MEMBER_ID2;
 describe("Post", function(){
     before(function(){
 

@@ -48,6 +48,6 @@ describe("Community", function(){
                 assert(res.id != 0, "could not create group");
                 done();
             }).catch(done);
-        });
+        }).timeout(5000);
     });
 });

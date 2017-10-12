@@ -4,8 +4,12 @@ var assert = require("assert"),
     event = require("../../app/models/event"),
     request = require("request-promise");
 
-//TODO: Setup test using env variable/create test resource
-let id = "100020029960461";
+var path = require('path'),
+    rootPath = path.normalize(__dirname + '/..');
+      
+var dotenv = require('dotenv').config({path: rootPath + '/.env'});
+
+let id = process.env.TEST_MEMBER_ID2;
 describe("Member", function(){
     before(function(){
 

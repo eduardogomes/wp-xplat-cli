@@ -34,7 +34,7 @@ The goal following this tutorial is having a **live stater-app** that implements
 
     ```
     git clone https://github.com/eduardogomes/wp-chatbot-boilerplate-node.git
-    cd wp-chatbot-boilerplate
+    cd wp-chatbot-boilerplate-node
     ```
 
 5. Install Node dependencies. We are using [Express](http://expressjs.com/) for serving stuff, [request](https://github.com/request/request) and [request-promise](https://github.com/request/request-promise) for sending and receiving messages.
@@ -63,13 +63,22 @@ The goal following this tutorial is having a **live stater-app** that implements
   ![Create a new Workplace App](/public/img/documentation-img/create_new_integration.png)
 
 4. Add a profile picture for the app. This will be used any time the app is visually represented, for instance if it makes a post to group.
-5. Choose the required [permissions](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions) for the app, based on the integration functionality you require.
+5. Choose the required [permissions](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions) for the app, based on the integration functionality you require. For this boilerplate implementation you will need only the 'Message any member' permission. To run all integration tests you will need the 'Read Group Content', 'Manage Group Content', 'Manage Groups' and 'Message any Member' permissions.
 
     ![Create a new Workplace App](/public/img/documentation-img/application-permissions.png)
 
-6. Copy and safely store the [access token](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions#appaccesstoken) that's shown to you. You'll need this when making API calls.
+6. Create, Copy and safely store the [access token](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions#appaccesstoken) that's shown to you. You'll need this when making API calls.
 
-7. Configure the messaging web hook with the Bot URL and the Verify Token (the same as the ```.env``` file)
+7. Configure your environment variables. You will need to set the data on the ```.env``` file in the root directory with 
+
+```
+NODE_ENV=development
+PAGE_ACCESS_TOKEN=Bearer <access token, created on step 6>
+VERIFY_TOKEN=  <a unique string to identity your bot, e.g.: dev-workshop-bot-token>
+PORT=5000
+```
+
+8. Configure the messaging web hook with the Bot URL (either Heroku or local) and the Verify Token (set in the previous step)
 
     ![Configure the Webhook](/public/img/documentation-img/webhook-config.png)
         
@@ -79,10 +88,8 @@ The goal following this tutorial is having a **live stater-app** that implements
 ```
 heroku config:set PAGE_ACCESS_TOKEN=your-page-access-token-here
 heroku config:set VERIFY_TOKEN=your-verify-token-here
-heroku config:set FB_APP_ID=your-app-id-here
 ```
 
-```FB_APP_ID``` is the app ID of the Workplace App you just created. You can find it directly on the integration details screen. 
 
 ### Check it out our integration tests and debug your bot
 
@@ -90,12 +97,6 @@ The project includes integration tests for most of available features in the Wor
 
     ![Boilerplate Workplace App Integration Tests](/public/img/documentation-img/integration_tests.png)
 
-You will need to change the data in the ```.env``` file using your instance access token, verify token and app id. 
-```
-PAGE_ACCESS_TOKEN=Bearer <your access token>
-VERIFY_TOKEN=<your verify token>
-FB_PAGE_ID=<your app id>
-```
 
 Then you can execute the test yourself using the following command:
 ```
