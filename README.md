@@ -78,7 +78,8 @@ VERIFY_TOKEN= <a unique string to identity your bot, e.g.: dev-workshop-bot-toke
 PORT=5000
 ```
 
-8. Configure the messaging web hook with the Bot URL (either Heroku or local) and the Verify Token (set in the previous step)
+8. Configure the messaging web hook with the Bot URL and the Verify Token (set in the previous step)
+    The url should be ```https://<your heroku app name>.herokuapp.com/webhook```.
 
     ![Configure the Webhook](/public/img/documentation-img/webhook-config.png)
         
