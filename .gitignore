@@ -36,6 +36,10 @@ node_modules
 # Environment-specific configuration
 # .env
 
+# Terraform templates
+terraform
+.tf
+
 # Various
 public/components
 .sass-cache

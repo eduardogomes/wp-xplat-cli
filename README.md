@@ -20,6 +20,8 @@ The goal following this tutorial is having a **live stater-app** that implements
 
 ### Download, build and deploy the project
 
+We also have instructions for [Linux](/public/linux.md) and [Windows](/public/windows.md) for AWS.
+
 1. Get a free [Heroku account](https://signup.heroku.com/) if you haven't already.
 
 2. Install the [Heroku toolbelt](https://toolbelt.heroku.com) which will let you launch, monitor and generally control your instances (and other services like databases) from the command line.
@@ -101,5 +103,7 @@ heroku config:set VERIFY_TOKEN=your-verify-token-here
 - [Debug your bot](/public/debug.md) in your local environment
 
 - Create a [Cron like job](https://www.npmjs.com/package/cron) to message a user or post in a group
+
+- Deploy your chatbot to a [Docker container](/public/docker.md)
 
 - [Wit.ai](https://wit.ai) is a service that lets you easily create text or voice based bots that humans can chat with on their preferred messaging platform. Basic wit.ai functionality will be baked into this starter app at some point in the future.

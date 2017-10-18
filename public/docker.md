@@ -1,24 +1,17 @@
-# Check it out our integration tests and debug your bot
+# Deploy your application to a Docker container
 
-The project includes integration tests for most of available features in the Workplace API, and you can understand better how to implement your bot interactions.
+Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and ship it all out as one package.
 
-    ![Boilerplate Workplace App Integration Tests](/img/documentation-img/integration-tests.png)
+1. Install [Docker](https://www.docker.com/get-docker)
 
+2. Build the application in the container using the following command:
 
-You can execute the test yourself using the following command:
 ```
-gulp build
-```
-
-When you need to debug you need set the webhook in Workplace to your local environment. A simple way to do that is use localtunnel:
-
-- Install LocalTunnel using ```npm install localtunnel``` 
-- Run the app locally using ```gulp develop```
-- In another Terminal session, tunnel to the port 5000 using ```lt -p 5000```
-- Configure your webhook in Workplace using the url created by localtunnel
-```
-lt -p 5000
-your url is: https://mczugwjaps.localtunnel.me 
+docker build -t wp-chatbot-boilerplate-node
 ```
 
-You can leave the tunnel open during all your debug session, but you will need to execute it again if you close the Terminal.
+3. Run your container locally 
+
+```
+docker run -p 5000:5000 -d wp-chatbot-boilerplate-node
+```
