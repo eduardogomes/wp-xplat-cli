@@ -62,7 +62,7 @@ We also have instructions for [Linux](/public/linux.md) and [Windows](/public/wi
 2. Click on the Create App button.
 3. Choose a relevant name and description for the app.
 
-  ![Create a new Workplace App](/public/img/documentation-img/create_new_integration.png)
+    ![Create a new Workplace App](/public/img/documentation-img/create_new_integration.png)
 
 4. Add a profile picture for the app. This will be used any time the app is visually represented, for instance if it makes a post to group.
 5. Choose the required [permissions](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions) for the app, based on the integration functionality you require. For this boilerplate implementation you will need only the 'Message any member' permission. To run all integration tests you will need the 'Read Group Content', 'Manage Group Content', 'Manage Groups' and 'Message any Member' permissions.
@@ -80,18 +80,20 @@ VERIFY_TOKEN= <a unique string to identity your bot, e.g.: dev-workshop-bot-toke
 PORT=5000
 ```
 
+### Set the missing configuration values in your Heroku environment
+
+```
+heroku config:set PAGE_ACCESS_TOKEN=Bearer <access token, the same that was set in the ```.env``` file>
+heroku config:set VERIFY_TOKEN=<a unique string to identity your bot, e.g.: dev-workshop-bot-token, the same that was set in the ```.env``` file>
+```
+
 8. Configure the messaging web hook with the Bot URL and the Verify Token (set in the previous step)
     The url should be ```https://<your heroku app name>.herokuapp.com/webhook```.
 
     ![Configure the Webhook](/public/img/documentation-img/webhook-config.png)
         
 
-### Set the missing configuration values in your Heroku environment
 
-```
-heroku config:set PAGE_ACCESS_TOKEN=your-page-access-token-here
-heroku config:set VERIFY_TOKEN=your-verify-token-here
-```
 
 
 # ⇨ Go to your Workplace instance find your bot and start chatting. 🤖
