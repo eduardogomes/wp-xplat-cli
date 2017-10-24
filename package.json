@@ -1,5 +1,5 @@
 {
-  "name": "wp-chatbot-boilerplate",
+  "name": "wp-xplat-cli",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -31,6 +31,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
+    "commander": "^2.11.0",
     "gulp": "^3.9.0",
     "gulp-eslint": "^4.0.0",
     "gulp-livereload": "^3.8.0",

@@ -6,13 +6,14 @@
                 "request": "launch",
                 "name": "Launch Program",
                 "program": "${workspaceRoot}/app.js",
+                "args": ["update-email", "edu.mndc.gms+test4@gmail.com", "edu.mndc.gms+test3@gmail.com"],
             },
             {
                 "type": "node",
                 "request": "launch",
                 "name": "mocha",
                 "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-                "args": ["tests/**/group.test.js", "--no-timeouts", "--colors"],
+                "args": ["tests/**/account.test.js", "--no-timeouts", "--colors"],
             }
         ]
     }

@@ -8,7 +8,7 @@ if (!process.env.IS_HEROKU) {
 var config = {
   root: rootPath,
   app: {
-    name: 'chatbot'
+    name: 'wp-xplat-cli'
   },
   env: process.env.ENV || '',
   port: process.env.PORT || '',

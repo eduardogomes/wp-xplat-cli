@@ -46,6 +46,17 @@ module.exports = {
       method: "POST",
     };
   },
+  "createPutOptions": function createPutOptions(url, qs){
+    return {
+      url: url,
+      qs: qs,
+      headers: {
+        "Authorization": config.page_access_token,
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+    };
+  },
   "createDeleteOptions": function createDeleteOptions(url, qs){
     return {
       url: url,
