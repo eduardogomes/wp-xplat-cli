@@ -43,7 +43,7 @@ If you never heard about Workplace maybe you should start on the [top 10 questio
     ![Create a new Workplace App](/public/img/documentation-img/create_new_integration.png)
 
 4. Add a profile picture for the app. This will be used any time the app is visually represented, for instance if it makes a post to group.
-5. Choose the required [permissions](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions) for the app, for the command update-email you will need .
+5. Choose the required [permissions](https://developers.facebook.com/docs/workplace/integrations/custom-integrations/permissions) for the app, for the command update-email you will need the "Manage Accounts" permission.
 
     ![Create a new Workplace App](/public/img/documentation-img/application-permissions.png)
 
