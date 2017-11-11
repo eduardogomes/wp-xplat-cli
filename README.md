@@ -59,11 +59,8 @@ PAGE_ACCESS_TOKEN=Bearer <access token, created on step 6 in the format "Bearer 
 # ⇨ Go to your favorite Terminal and execute
 
 ```
-node app.js update-email <currentEmail>  <newEmail>
-```
-
-You should see the following output:
-```
-About to change e-mail from <currentEmail> to <newEmail>
-SUCCESS updating email from <currentEmail> to <newEmail>
+    node app.js update-email <email> <newEmail>              
+    node app.js create-group <name> <description> <privacy>  
+    node app.js add-member <groupid> <member>                
+    node app.js add-admin <groupid> <admin>                  
 ```
