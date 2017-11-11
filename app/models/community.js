@@ -35,7 +35,6 @@ module.exports = {
   "getGroupPrivacyOpen": () => { return "OPEN"; },
   "getGroupPrivacyClosed": () => { return "CLOSED"; },
   "getGroupPrivacySecret": () => { return "SECRET"; },
-  
 };
 
 
