@@ -58,4 +58,16 @@ program
         });    
     });    
 });
-program.parse(process.argv); 
+program
+.version('0.0.1')
+.command('list-groups')
+.description("List all groups")
+.action(function(){
+    community.getAllGroups(group.getAvailableGroupFields())
+    .then((groups) => {
+        groups.forEach(g => {
+            console.log("\"" + g.name + "\" ," + g.id + ", \"" + g.privacy + "\"");
+        });
+    })
+});
+program.parse(process.argv);
