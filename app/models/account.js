@@ -34,4 +34,19 @@ module.exports = {
       throw error;
     });
   },
+  "updateUserLocale": function updateUserLocale(email, locale) {
+    return this.getUserByEmail(email).then(user => {
+      let newUser = JSON.parse(user).Resources[0];
+      if (!newUser){
+        throw new Error("Could not find " + email);
+      }
+      let options = common.createPutOptions(scimAPIUrl + "/" + newUser.id)
+      newUser.locale = locale;
+      options.body = JSON.stringify(newUser);
+      return rp(options);  
+    }).catch(error => {
+      throw error;
+    });
+  },
+
 };

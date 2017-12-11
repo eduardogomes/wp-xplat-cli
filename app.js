@@ -20,6 +20,19 @@ program
 });
 program
 .version('0.0.1')
+.command('update-locale <email> <locale>')
+.description("Update an user's locale")
+.action(function(email, locale){
+  console.log("About to change locale for user " + email + " to " + locale);
+    account.updateUserLocale(email, locale)
+    .then(user => {
+        console.log("SUCCESS updating locale for " +  email + " to " + locale);
+    }).catch(error=>{
+        console.log("ERROR updating locale for " +  email + " to " + locale + "Error: " + error);
+    });
+});
+program
+.version('0.0.1')
 .command('create-group <name> <description> <privacy>')
 .description("Create a group using the informed name, description, privacy (OPEN, CLOSED, SECRET)")
 .action(function(name, description, privacy, members, admins){

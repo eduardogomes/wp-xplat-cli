@@ -6,7 +6,7 @@
                 "request": "launch",
                 "name": "Launch Program",
                 "program": "${workspaceRoot}/app.js",
-                "args": ["update-email", "edu.mndc.gms+test4@gmail.com", "edu.mndc.gms+test3@gmail.com"],
+                "args": ["update-locale", "edugomes+test@fb.com", "es_LA"],
             },
             {
                 "type": "node",
