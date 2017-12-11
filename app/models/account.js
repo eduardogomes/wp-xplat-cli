@@ -34,6 +34,21 @@ module.exports = {
       throw error;
     });
   },
+  "updateWorkAnniversary": function updateWorkAnniversary(email, workAnniversary) {
+    let unixWorkAnniversary = Date.parse(workAnniversary) / 1000;
+    return this.getUserByEmail(email).then(user => {
+      let newUser = JSON.parse(user).Resources[0];
+      if (!newUser){
+        throw new Error("Could not find " + email);
+      }
+      let options = common.createPutOptions(scimAPIUrl + "/" +  newUser.id)
+      newUser["urn:scim:schemas:extension:facebook:starttermdates:1.0"].startDate = unixWorkAnniversary;
+      options.body = JSON.stringify(newUser);
+      return rp(options);  
+    }).catch(error => {
+      throw error;
+    });
+  },
   "updateUserLocale": function updateUserLocale(email, locale) {
     return this.getUserByEmail(email).then(user => {
       let newUser = JSON.parse(user).Resources[0];

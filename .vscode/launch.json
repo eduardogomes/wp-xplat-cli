@@ -6,7 +6,7 @@
                 "request": "launch",
                 "name": "Launch Program",
                 "program": "${workspaceRoot}/app.js",
-                "args": ["update-locale", "edugomes+test@fb.com", "es_LA"],
+                "args": ["update-workanniversary", "edu.mndc.gms+test2@gmail.com", "12/11/2017"],
             },
             {
                 "type": "node",

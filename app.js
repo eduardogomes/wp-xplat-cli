@@ -83,4 +83,17 @@ program
         });
     })
 });
+program
+.version('0.0.1')
+.command('update-workanniversary <email> <startDate>')
+.description("Update an user's startDate")
+.action(function(email, startDate){
+  console.log("About to update work anniversary of " + email + " to " + startDate);
+    account.updateWorkAnniversary(email, startDate)
+    .then(user => {
+        console.log("SUCCESS updating work anniversary from " +  email + " to " + startDate);
+    }).catch(error=>{
+        console.log("ERROR updating work anniversary from " +  email + " to " + startDate + " Error: " + error);
+    });
+});
 program.parse(process.argv);

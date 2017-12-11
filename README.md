@@ -63,5 +63,7 @@ PAGE_ACCESS_TOKEN=Bearer <access token, created on step 6 in the format "Bearer 
     node app.js create-group <name> <description> <privacy>  
     node app.js add-member <groupid> <member>                
     node app.js add-admin <groupid> <admin>   
-    node app.js list-groups               
+    node app.js list-groups      
+    node app.js update-locale <email> <locale>
+    node app.js update-workanniversary <email> <startDate>   
 ```
