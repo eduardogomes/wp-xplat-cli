@@ -1,6 +1,8 @@
 var common = require("./common.js"), 
     event = require("./event.js"),
-    post = require("./post.js");
+    post = require("./post.js"),
+    config = require("../../config/config.js"),
+    request = require("request-promise");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 
@@ -66,4 +68,25 @@ module.exports = {
   "createMemberTag": function createMemberTag(id) {
     return "@[" + id + "]";
   },
-};
+
+  "getSingleMember": function getSingleMember(id) {
+    let url = graphAPIUrl + id;
+    let options = {
+      url: url,
+      headers: {
+        "Authorization": config.page_access_token,
+      },
+      method: "GET",
+    };
+    console.log(options);
+    let deferred = Promise.defer();
+    request(options).then(res => {
+        var response = JSON.parse(res);
+        console.log(response);
+        deferred.resolve(response);
+    }).catch(err => {
+      deferred.reject(err);
+    });
+    return deferred.promise;
+  },
+}
