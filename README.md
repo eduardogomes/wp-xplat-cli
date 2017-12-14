@@ -15,7 +15,7 @@ If you never heard about Workplace maybe you should start on the [top 10 questio
 
 ### Download, build and deploy the project
 
-1. [Install Node]  (https://nodejs.org), this will be our server environment. Then open up Terminal (or whatever your CLI might be) and make sure you're running the latest version of npm, installed globally (the ```-g``` switch):
+1. [Install Node 6.x]  (https://nodejs.org), this will be our server environment. Then open up Terminal (or whatever your CLI might be) and make sure you're running the latest version of npm, installed globally (the ```-g``` switch):
 
     ```
     sudo npm install npm -g
