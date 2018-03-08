@@ -32,6 +32,7 @@ module.exports = {
       },
       headers: {
         "Authorization": config.page_access_token,
+        "Content-Type": "application/json",
       },
       method: "GET",
     };
@@ -42,6 +43,7 @@ module.exports = {
       qs: qs,
       headers: {
         "Authorization": config.page_access_token,
+        "Content-Type": "application/json",
       },
       method: "POST",
     };

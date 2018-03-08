@@ -15,6 +15,7 @@ module.exports = {
       },
       headers: {
         "Authorization": config.page_access_token,
+        "Content-Type": "application/json",
       },
       method: "GET",
     };
@@ -61,7 +62,20 @@ module.exports = {
       return rp(options);  
     }).catch(error => {
       throw error;
-    });
+    })
   },
-
+  "updateUserAuthMethod": function updateUserAuthMethod(email, method) {
+    return this.getUserByEmail(email).then(user => {
+      let newUser = JSON.parse(user).Resources[0];
+      if (!newUser){
+        throw new Error("Could not find " + email);
+      }
+      let options = common.createPutOptions(scimAPIUrl + "/" + newUser.id)
+      newUser.auth_method = method;
+      options.body = JSON.stringify(newUser);
+      return rp(options);  
+    }).catch(error => {
+      throw error;
+    })
+  },
 };

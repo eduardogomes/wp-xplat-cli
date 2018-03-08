@@ -6,7 +6,7 @@
                 "request": "launch",
                 "name": "Launch Program",
                 "program": "${workspaceRoot}/app.js",
-                "args": ["update-workanniversary", "edu.mndc.gms+test2@gmail.com", "12/11/2017"],
+                "args": ["update-locale", "lj.032140@rihappy.com.br", "pt_BR"],
             },
             {
                 "type": "node",

@@ -96,4 +96,23 @@ program
         console.log("ERROR updating work anniversary from " +  email + " to " + startDate + " Error: " + error);
     });
 });
+program
+.version('0.0.1')
+.command('update-userauthmethod <email> <sso>')
+.description("Update an user's Authentication Method (true for SSO, false for Password)")
+.action(function(email, sso){
+    var method;
+    if (sso){
+        method = "sso"
+    } else {
+        method = "password"
+    }
+  console.log("About to update authentication method of " + email + " to " + method);
+    account.updateUserAuthMethod(email, method)
+    .then(user => {
+        console.log("SUCCESS updating work anniversary from " +  email + " to " + method);
+    }).catch(error=>{
+        console.log("ERROR updating work anniversary from " +  email + " to " + method + " Error: " + error);
+    });
+});
 program.parse(process.argv);
