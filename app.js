@@ -1,8 +1,8 @@
-var config = require('./config/config'), 
+var config = require('./config/config'),
     account = require('./app/models/account'),
-    group = require('./app/models/group'),  
-    member = require('./app/models/member'),  
-    community = require('./app/models/community'),     
+    group = require('./app/models/group'),
+    member = require('./app/models/member'),
+    community = require('./app/models/community'),
     program = require('commander');
 
 program
@@ -68,8 +68,8 @@ program
             console.log("SUCCESS adding admin  " + admin +  " id " + groupid);
         }).catch(error=>{
             console.log("ERROR adding admin  " + admin +  " id " + groupid + " Error: " + error);
-        });    
-    });    
+        });
+    });
 });
 program
 .version('0.0.1')
@@ -110,9 +110,9 @@ program
   console.log("About to update authentication method of " + email + " to " + method);
     account.updateUserAuthMethod(email, method)
     .then(user => {
-        console.log("SUCCESS updating work anniversary from " +  email + " to " + method);
+        console.log("SUCCESS updating authentication method of " +  email + " to " + method);
     }).catch(error=>{
-        console.log("ERROR updating work anniversary from " +  email + " to " + method + " Error: " + error);
+        console.log("ERROR updating authentication method of " +  email + " to " + method + " Error: " + error);
     });
 });
 program.parse(process.argv);
