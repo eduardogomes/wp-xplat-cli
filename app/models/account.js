@@ -1,25 +1,27 @@
 
-var common = require("./common.js"),
-    rp = require("request-promise"),
+var rp = require("request-promise"),
     config = require("../../config/config.js");
 
+var scimApi = rp.defaults({
+  baseUrl: "https://www.facebook.com/scim/v1/Users",
+  headers: {
+    "Authorization": config.page_access_token,
+    "Content-Type": "application/json",
+    "User-Agent": "wp-xplat-cli",
+  },
+});
 
-const scimAPIUrl = "https://www.facebook.com/scim/v1/Users";
 module.exports = {
-  
+
+
   "getUserByEmail": function getUserByEmail(email) {
     let options = {
-      url: scimAPIUrl,
+      url: "/",
       qs: {
         "filter": "userName eq \"" + email + "\"",
       },
-      headers: {
-        "Authorization": config.page_access_token,
-        "Content-Type": "application/json",
-      },
-      method: "GET",
     };
-    return rp(options);
+    return scimApi(options);
   },
   "updateUserEmail": function updateUserEmail(originalEmail, updatedEmail) {
     return this.getUserByEmail(originalEmail).then(user => {
@@ -27,10 +29,13 @@ module.exports = {
       if (!newUser){
         throw new Error("Could not find " + originalEmail);
       }
-      let options = common.createPutOptions(scimAPIUrl + "/" + newUser.id)
+      let options = {
+        url: "/" + newUser.id,
+        method: "PUT",
+      };
       newUser.userName = updatedEmail;
       options.body = JSON.stringify(newUser);
-      return rp(options);  
+      return scimApi(options);  
     }).catch(error => {
       throw error;
     });
@@ -42,10 +47,13 @@ module.exports = {
       if (!newUser){
         throw new Error("Could not find " + email);
       }
-      let options = common.createPutOptions(scimAPIUrl + "/" +  newUser.id)
+      let options = {
+        url: "/" + newUser.id,
+        method: "PUT",
+      };
       newUser["urn:scim:schemas:extension:facebook:starttermdates:1.0"].startDate = unixWorkAnniversary;
       options.body = JSON.stringify(newUser);
-      return rp(options);  
+      return scimApi(options);  
     }).catch(error => {
       throw error;
     });
@@ -56,13 +64,16 @@ module.exports = {
       if (!newUser){
         throw new Error("Could not find " + email);
       }
-      let options = common.createPutOptions(scimAPIUrl + "/" + newUser.id)
+      let options = {
+        url: "/" + newUser.id,
+        method: "PUT",
+      };
       newUser.locale = locale;
       options.body = JSON.stringify(newUser);
-      return rp(options);  
+      return scimApi(options);  
     }).catch(error => {
       throw error;
-    })
+    });
   },
   "updateUserAuthMethod": function updateUserAuthMethod(email, method) {
     return this.getUserByEmail(email).then(user => {
@@ -70,12 +81,15 @@ module.exports = {
       if (!newUser){
         throw new Error("Could not find " + email);
       }
-      let options = common.createPutOptions(scimAPIUrl + "/" + newUser.id)
+      let options = {
+        url: "/" + newUser.id,
+        method: "PUT",
+      };
       newUser.auth_method = method;
       options.body = JSON.stringify(newUser);
-      return rp(options);  
+      return scimApi(options);  
     }).catch(error => {
       throw error;
-    })
+    });
   },
 };

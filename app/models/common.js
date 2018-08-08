@@ -44,6 +44,7 @@ module.exports = {
       headers: {
         "Authorization": config.page_access_token,
         "Content-Type": "application/json",
+        "User-Agent": "wp-xplat-cli",
       },
       method: "POST",
     };
@@ -55,6 +56,7 @@ module.exports = {
       headers: {
         "Authorization": config.page_access_token,
         "Content-Type": "application/json",
+        "User-Agent": "wp-xplat-cli",
       },
       method: "PUT",
     };

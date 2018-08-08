@@ -6,7 +6,7 @@
                 "request": "launch",
                 "name": "Launch Program",
                 "program": "${workspaceRoot}/app.js",
-                "args": ["update-locale", "lj.032140@rihappy.com.br", "pt_BR"],
+                "args": ["update-locale", "scimagent-user24NEW@eduardogomes.net", "es_LA"],
             },
             {
                 "type": "node",
