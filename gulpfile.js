@@ -1,5 +1,4 @@
 var gulp = require('gulp'),
-  nodemon = require('gulp-nodemon'),
   plumber = require('gulp-plumber'),
   livereload = require('gulp-livereload'),
   eslint = require('gulp-eslint'),
