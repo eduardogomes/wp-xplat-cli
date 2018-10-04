@@ -73,7 +73,7 @@ module.exports = {
     let url = graphAPIUrl + id + "/member_requests";
     return member.getEdgeMembers(url, fields);
   },
-   
+
   "getAllMembers": function getAllMembers(id, fields) {
     let url = graphAPIUrl + id + "/members";
     return member.getEdgeMembers(url, fields);

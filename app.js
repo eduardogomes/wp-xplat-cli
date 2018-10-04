@@ -115,4 +115,18 @@ program
         console.log("ERROR updating authentication method of " +  email + " to " + method + " Error: " + error);
     });
 });
+program
+.version('0.0.1')
+.command('group-members')
+.description("List group members")
+.action(function(id, only_claimed){
+    var isClaimed = (only_claimed == 'true');
+    group.getAllMembers(id, member.getAvailableMemberFields()).then(members => {
+        members.forEach(m => {
+            if (!isClaimed || m.account_claim_time) {
+                console.log("\"" + m.email + "\"");
+            }
+        });    
+    });
+});
 program.parse(process.argv);

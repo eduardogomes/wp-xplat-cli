@@ -23,6 +23,7 @@ module.exports = {
       "name_format",
       "administrator",
       "updated_time",
+      "account_claim_time",
     ];
   },
 
