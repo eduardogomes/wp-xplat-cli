@@ -129,4 +129,17 @@ program
         });    
     });
 });
+program
+.version('0.0.1')
+.command('update-manager <email> <manager_email>')
+.description("Update an user's Manager")
+.action(function(email, manager_email){
+  console.log("About to update manager of " + email + " to " + manager_email);
+    account.updateUserManager(email, manager_email)
+    .then(user => {
+        console.log("SUCCESS updating manager of " +  email + " to " + manager_email);
+    }).catch(error=>{
+        console.log("ERROR updating manager of " +  email + " to " + manager_email + " Error: " + error);
+    });
+});
 program.parse(process.argv);

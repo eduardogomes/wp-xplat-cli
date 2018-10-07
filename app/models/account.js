@@ -92,4 +92,33 @@ module.exports = {
       throw error;
     });
   },
+  "updateUserManager": function updateUserManager(email, manager_email) {
+    return this.getUserByEmail(email).then(user => {
+      let newUser = JSON.parse(user).Resources[0];
+      if (!newUser){
+        throw new Error("Could not find " + email);
+      }
+      if (manager_email===""){
+        if (newUser['urn:scim:schemas:extension:enterprise:1.0'] !== undefined && newUser['urn:scim:schemas:extension:enterprise:1.0'].manager !== undefined){
+          delete newUser['urn:scim:schemas:extension:enterprise:1.0'].manager.managerId;
+          let options = {
+            url: "/" + newUser.id,
+            method: "PUT",
+          };
+          options.body = JSON.stringify(newUser);
+          return scimApi(options);  
+        }
+      } else {
+        let manager = this.getUserByEmail(manager_email).then(m => {
+          newUser['urn:scim:schemas:extension:enterprise:1.0'].manager = {"managerId": JSON.parse(m).Resources[0].id};
+          let options = {
+            url: "/" + newUser.id,
+            method: "PUT",
+          };
+          options.body = JSON.stringify(newUser);
+          return scimApi(options);  
+        });
+      }
+    });
+  },
 };
