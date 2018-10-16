@@ -15,7 +15,7 @@ If you never heard about Workplace maybe you should start on the [top 10 questio
 
 ### Download, build and deploy the project
 
-1. [Install Node 6.x]  (https://nodejs.org), this will be our server environment. Then open up Terminal (or whatever your CLI might be) and make sure you're running the latest version of npm, installed globally (the ```-g``` switch):
+1. [Install Node 6.x](https://nodejs.org), this will be our server environment. Then open up Terminal (or whatever your CLI might be) and make sure you're running the latest version of npm, installed globally (the ```-g``` switch):
 
     ```
     sudo npm install npm -g
@@ -68,4 +68,5 @@ PAGE_ACCESS_TOKEN=Bearer <access token, created on step 6 in the format "Bearer 
     node app.js update-workanniversary <email> <startDate>
     node app.js update-userauthmethod <email> <sso> (True for SSO, False for password)
     node app.js group-members <group id> <only_claimed> (True for only claimed account, false for all members)
+    node app.js update-manager <email> <manager email, use "" to remove manager relationship>
 ```
