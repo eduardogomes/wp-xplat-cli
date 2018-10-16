@@ -58,6 +58,35 @@ program
 });
 program
 .version('0.0.1')
+.command('remove-member <groupid> <member>')
+.description("Remove a member in a existing group ")
+.action(function(groupid, member){
+  console.log("About to remove member  " + member + " id " + groupid);
+    group.removeMemberToGroupByEmail(groupid, member).then(result => {
+        console.log("SUCCESS removing member  " + member +  " id " + groupid);
+    }).catch(error=>{
+        console.log("ERROR removing member  " + member +  " id " + groupid + " Error: " + error);
+    });
+});
+program
+.version('0.0.1')
+.command('remove-all-member <groupid>')
+.description("Remove all members in a existing group ")
+.action(function(groupid){
+    console.log("About to all members from id " + groupid);
+    group.getAllMembers(groupid, member.getAvailableMemberFields()).then(members => {
+        members.forEach(m => {
+            group.removeMemberToGroupByEmail(groupid, m.email).then(result => {
+                console.log("SUCCESS removing member  " + m.email +  " id " + groupid);
+            }).catch(error=>{
+                console.log("ERROR removing member  " + m.email +  " id " + groupid + " Error: " + error);
+            });
+        });    
+    });      
+});
+
+program
+.version('0.0.1')
 .command('add-admin <groupid> <admin>')
 .description("Add a new admin in a existing group ")
 .action(function(groupid, admin){
