@@ -29,6 +29,7 @@ module.exports = {
       url: url,
       qs: {
         fields: fields.join(),
+        limit: 500,
       },
       headers: {
         "Authorization": config.page_access_token,

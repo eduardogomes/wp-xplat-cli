@@ -66,7 +66,7 @@ PAGE_ACCESS_TOKEN=Bearer <access token, created on step 6 in the format "Bearer 
     node app.js list-groups      
     node app.js update-locale <email> <locale>
     node app.js update-workanniversary <email> <startDate>
-    node app.js update-userauthmethod <email> <sso> (True for SSO, False for password)
+    node app.js update-userauthmethod <email> <sso|password> 
     node app.js group-members <group id> <only_claimed> (True for only claimed account, false for all members)
     node app.js update-manager <email> <manager email, use "" to remove manager relationship>
 ```

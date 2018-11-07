@@ -82,7 +82,7 @@ program
                 console.log("ERROR removing member  " + m.email +  " id " + groupid + " Error: " + error);
             });
         });    
-    });      
+    }).then(() => console.log("FINISH!"));      
 });
 
 program
@@ -128,14 +128,8 @@ program
 program
 .version('0.0.1')
 .command('update-userauthmethod <email> <sso>')
-.description("Update an user's Authentication Method (true for SSO, false for Password)")
-.action(function(email, sso){
-    var method;
-    if (sso){
-        method = "sso"
-    } else {
-        method = "password"
-    }
+.description("Update an user's Authentication Method (sso or password)")
+.action(function(email, method){
   console.log("About to update authentication method of " + email + " to " + method);
     account.updateUserAuthMethod(email, method)
     .then(user => {

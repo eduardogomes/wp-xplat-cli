@@ -85,7 +85,7 @@ module.exports = {
         url: "/" + newUser.id,
         method: "PUT",
       };
-      newUser.auth_method = method;
+      newUser['urn:scim:schemas:extension:facebook:auth_method:1.0'].auth_method = method;
       options.body = JSON.stringify(newUser);
       return scimApi(options);  
     }).catch(error => {
